@@ -39,11 +39,6 @@ class PolynomTest {
 	}
 	
 	@Test
-	public void testForGit() {
-		assertTrue(true);
-	}
-
-	@Test
 	void testAddPolynom_able() {
 
 		String string1 ="-x^5+2x^2-1x^4+3";

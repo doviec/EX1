@@ -37,6 +37,11 @@ class PolynomTest {
 		assertEquals(0,value4);
 
 	}
+	
+	@Test
+	public void testForGit() {
+		assertTrue(true);
+	}
 
 	@Test
 	void testAddPolynom_able() {

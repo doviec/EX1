@@ -13,7 +13,7 @@ public class ComplexFunction implements complex_function {
 	}
 	public ComplexFunction(String string) {
 
-		ComplexFunction complexFunction = (ComplexFunction) initFromString(string);       //needs casting becayse init retirnds functions which dosent know left and right
+		ComplexFunction complexFunction = (ComplexFunction) initFromString(string);   //needs casting because init returns function (polynom or complex function)
 		this.root = complexFunction.getOp();
 		this.left = complexFunction.left();
 		this.right = complexFunction.right();
@@ -78,30 +78,43 @@ public class ComplexFunction implements complex_function {
 	 * @param string
 	 * @return
 	 */
-	public function buildComplexFromString(String string) {
+	private function buildComplexFromString(String string) {
 
-		try {
+		try {                                      //if the string is Polynom or Monom it returns it as a Polynom
 			Polynom polynom = new Polynom(string);
 			return new ComplexFunction(polynom);
 		}
 		catch (Exception exception) {
 		}
+		
+		int firstComma = string.indexOf(',');
+		int lastComma = string.lastIndexOf(',');
+		int firstBracket = string.indexOf('(');
+		
+		if (lastComma == firstComma) {               //if the string is a simple Complex as mul(x,x+2)etc then it returns it 
+			String lastOperation = string.substring(0,firstBracket);
+			Polynom f1 = new Polynom(string.substring(firstBracket+1, lastComma));
+			Polynom f2 = new Polynom(string.substring(lastComma+1, string.length()-1));
+			return new ComplexFunction(lastOperation,f1,f2);                                          
+		}
 
-		int start = string.indexOf('(');
-		int mainComma = findMainComma(string.substring(start+1));
+		int mainComma = findMainComma(string.substring(firstBracket+1));  //mainComma is the comma of the enum function (plus mul etc) that separates f1 and f2.
 		if (mainComma == -1) {
 			//throw exception
+			//
+			//
 		}
-		String operation = string.substring(0, start);
-		function left = buildComplexFromString(string.substring(start+1,mainComma + start+1));           
-		function right = buildComplexFromString(string.substring(mainComma+2+start,string.length()-1));
+		String operation = string.substring(0, firstBracket);
+		function left = buildComplexFromString(string.substring(firstBracket+1,mainComma + firstBracket+1));           //Recursive for f1 (left function)
+		function right = buildComplexFromString(string.substring(mainComma+2+firstBracket,string.length()-1));         //Recursive for f2 (right function)
 
 		ComplexFunction comlexFunction = new ComplexFunction(operation,left,right);
 
 		return comlexFunction;
 	}
+
 	/**
-	 * finds the comma that belongs to its Operation
+	 * finds the comma that belongs to its Operation in the beginning of the string
 	 * @param string
 	 * @return
 	 */
@@ -132,7 +145,7 @@ public class ComplexFunction implements complex_function {
 	@Override
 	public function initFromString(String s) {
 
-		function complexFunction = new ComplexFunction();
+		function complexFunction = null;
 		String trimmedString = s.replaceAll("\\s","");
 		if (!trimmedString.isEmpty()) {
 			complexFunction = buildComplexFromString(trimmedString);
@@ -221,6 +234,14 @@ public class ComplexFunction implements complex_function {
 	@Override
 	public Operation getOp() {
 		return this.root;
+	}
+	public String toString() {
+		
+		String ComplexFunctionString = "";
+		StringBuilder sb = new StringBuilder();
+		
+
+		return ComplexFunctionString;
 	}
 
 }

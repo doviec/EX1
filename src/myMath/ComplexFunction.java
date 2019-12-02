@@ -13,16 +13,18 @@ public class ComplexFunction implements complex_function {
 	}
 	public ComplexFunction(String string) {
 		
-		initFromString(string);
+		ComplexFunction complexFunction = (ComplexFunction) initFromString(string);       //needs casting becayse init retirnds functions which dosent know left and right
+		this.root = complexFunction.getOp();
+		this.left = complexFunction.left();
+		this.right = complexFunction.right();
+		
 	}
-
 	public ComplexFunction(function f) {
 		
 		this.root = Operation.None;
 		this.left = f;
 		this.right = null;
 	}
-
 	public ComplexFunction(String string, function f1, function f2) {
 
 		root = checkWhichOperation(string);
@@ -32,22 +34,43 @@ public class ComplexFunction implements complex_function {
 	private Operation checkWhichOperation(String string) {
 
 		switch (string) {
-		case ("Plus"):
+		case ("plus"):
 			return Operation.Plus;
-		case ("Times"):
+		case ("mul"):
 			return Operation.Times;
 		case ("Comp"):
 			return Operation.Comp;
-		case ("Divid"):
+		case ("div"):
 			return Operation.Divid;
-		case ("Max"):
+		case ("max"):
 			return Operation.Max;
-		case ("Min"):
+		case ("min"):
 			return Operation.Min;
-		case ("None"):
+		case (""):
 			return Operation.None;
 		default :                     //maybe a runtime exception that not a valid operation 
 			return Operation.Error;
+		}
+	}
+	private String checkWhichString(Operation operation) {     //checks which string represents the operation
+
+		switch (operation) {
+		case Plus:
+			return "plus";
+		case Times:
+			return "times";
+		case Comp:
+			return "comp";
+		case Divid:
+			return "divide";
+		case Max:
+			return "max";
+		case Min:
+			return "min";
+		case None:
+			return "no operation";
+		default :                     //maybe a runtime exception that not a valid operation 
+			return "error";
 		}
 	}
 	/**
@@ -59,7 +82,7 @@ public class ComplexFunction implements complex_function {
 
 		try {
 			Polynom polynom = new Polynom(string);
-			return polynom;
+			return new ComplexFunction(polynom);
 		}
 		catch (Exception exception) {
 		}
@@ -70,8 +93,8 @@ public class ComplexFunction implements complex_function {
 			//throw exception
 		}
 		String operation = string.substring(0, start);
-		function left = buildComplexFromString(string.substring(start+1,mainComma));           
-		function right = buildComplexFromString(string.substring(mainComma+1,string.length()-1));
+		function left = buildComplexFromString(string.substring(start+1,mainComma + start+1));           
+		function right = buildComplexFromString(string.substring(mainComma+2+start,string.length()-1));
 
 		ComplexFunction comlexFunction = new ComplexFunction(operation,left,right);
 

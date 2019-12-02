@@ -82,7 +82,7 @@ public class ComplexFunction implements complex_function {
 
 		try {                                      //if the string is Polynom or Monom it returns it as a Polynom
 			Polynom polynom = new Polynom(string);
-			return new ComplexFunction(polynom);
+			return polynom;
 		}
 		catch (Exception exception) {
 		}

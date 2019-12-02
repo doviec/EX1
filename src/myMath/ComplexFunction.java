@@ -4,7 +4,7 @@ import java.util.function.Function;
 
 public class ComplexFunction implements complex_function {
 
-	private Operation root;
+	private Operation root = Operation.None;
 	private function left;
 	private function right;
 
@@ -12,15 +12,15 @@ public class ComplexFunction implements complex_function {
 
 	}
 	public ComplexFunction(String string) {
-		
+
 		ComplexFunction complexFunction = (ComplexFunction) initFromString(string);       //needs casting becayse init retirnds functions which dosent know left and right
 		this.root = complexFunction.getOp();
 		this.left = complexFunction.left();
 		this.right = complexFunction.right();
-		
+
 	}
 	public ComplexFunction(function f) {
-		
+
 		this.root = Operation.None;
 		this.left = f;
 		this.right = null;
@@ -149,56 +149,78 @@ public class ComplexFunction implements complex_function {
 
 	@Override
 	public void plus(function f1) {
-		// TODO Auto-generated method stub
 
+		if (this.right != null) {
+			this.left = this;
+		}		
+		root = Operation.Plus;
+		this.right = f1;
 	}
+
 
 	@Override
 	public void mul(function f1) {
-		// TODO Auto-generated method stub
 
+		if (this.right != null) {
+			this.left = this;
+		}		
+		root = Operation.Times;
+		this.right = f1;
 	}
 
 	@Override
 	public void div(function f1) {
-		// TODO Auto-generated method stub
 
+		if (this.right != null) {
+			this.left = this;
+		}		
+		root = Operation.Divid;
+		this.right = f1;
 	}
 
 	@Override
 	public void max(function f1) {
-		// TODO Auto-generated method stub
 
+		if (this.right != null) {
+			this.left = this;
+		}		
+		root = Operation.Max;
+		this.right = f1;
 	}
 
 	@Override
 	public void min(function f1) {
-		// TODO Auto-generated method stub
 
+		if (this.right != null) {
+			this.left = this;
+		}		
+		root = Operation.Min;
+		this.right = f1;
 	}
 
 	@Override
 	public void comp(function f1) {
-		// TODO Auto-generated method stub
 
+		if (this.right != null) {
+			this.left = this;
+		}		
+		root = Operation.Comp;
+		this.right = f1;
 	}
 
 	@Override
 	public function left() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.left;
 	}
 
 	@Override
 	public function right() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.right;
 	}
 
 	@Override
 	public Operation getOp() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.root;
 	}
 
 }

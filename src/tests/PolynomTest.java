@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import myMath.Monom;
 import myMath.Polynom;
 import myMath.Polynom_able;
+import myMath.function;
 
 class PolynomTest {
 
@@ -281,7 +282,7 @@ class PolynomTest {
 		String string1 ="9-x^2";
 
 		Polynom_able polynom_able1 = new Polynom(string1);
-		Polynom_able polynom_able2 = polynom_able1.copy();
+		function polynom_able2 = polynom_able1.copy();
 
 		polynom_able1.toString();
 		polynom_able2.toString();

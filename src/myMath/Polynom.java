@@ -15,7 +15,7 @@ import myMath.Monom;
  * 3. Derivative
  * 
  * @author Boaz
- *
+ *`
  */
 
 public class Polynom implements Polynom_able{
@@ -154,7 +154,6 @@ public class Polynom implements Polynom_able{
 /**
  * checks if two polynoms are equal.
  */
-	@Override
 	public boolean equals(Polynom_able p1) {
 		Iterator<Monom> iterator = p1.iteretor();
 		int count = 0;
@@ -340,4 +339,9 @@ public class Polynom implements Polynom_able{
 		return polynomStr;
 
 	}
+@Override
+public function initFromString(String s) {
+	// TODO Auto-generated method stub
+	return null;
+}
 }

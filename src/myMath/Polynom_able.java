@@ -64,7 +64,7 @@ public interface Polynom_able extends cont_function{
 	 * @param p1
 	 * @return true iff this polynom represents the same function as p1
 	 */
-	public boolean equals (Polynom_able p1);
+	public boolean equals (Object p1);
 	/**
 	 * Test if this is the Zero Polynom
 	 * @return
@@ -75,11 +75,7 @@ public interface Polynom_able extends cont_function{
 	 * create a deep copy of this Polynom
 	 * @return 
 	 */
-	public Polynom_able copy();
-	/**
-	 * Compute a new Polynom which is the derivative of this Polynom
-	 * @return
-	 */
+
 	public Polynom_able derivative();
 	/**
 	 * @return an Iterator (of Monoms) over this Polynom

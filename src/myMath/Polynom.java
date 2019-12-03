@@ -344,4 +344,5 @@ public function initFromString(String s) {
 	// TODO Auto-generated method stub
 	return null;
 }
+
 }

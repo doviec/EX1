@@ -11,7 +11,7 @@ class ComplexFunctionTest {
 
 	@Test
 	void testComplexFunction() {
-		String s1 = "mul(1,2)"; 
+		String s1 = "div(plus(-1.0x^4 +2.4x^2 +3.1,+0.1x^5 -1.2999999999999998x +5.0),-1.0x^4 +2.4x^2 +3.1)"; 
 		String s2 = "mul(mul(1,2),3)";
 		String s3 = "mul(1,mul(2,3))";
 		
@@ -19,7 +19,7 @@ class ComplexFunctionTest {
 		ComplexFunction complex2 = new ComplexFunction(s2);
 		ComplexFunction complex3 = new ComplexFunction(s3);
 		
-		System.out.println(s1.toString());
+		System.out.println(complex1.toString());
 		
 	}
 	@Test
@@ -43,7 +43,7 @@ class ComplexFunctionTest {
 	void testMul() {
 		
 		String s1 = "x^2";
-		String s2 = "x";
+		String s2 = "mul(plus(4,x^2),mul(4x,2))";
 		String s3 = "mul(1,2)"; 
 		String s4 = "plus(4,mul(5x+2,x^5))";
 		
@@ -52,9 +52,10 @@ class ComplexFunctionTest {
 		ComplexFunction complex3 = new ComplexFunction(s3);
 		ComplexFunction complex4 = new ComplexFunction(s4);
 
-		complex1.mul(complex2);
+		complex1.div(complex2);
 		complex3.mul(complex2);
 		complex2.mul(complex4);
+		System.out.println(complex1.toString());
 	}
 	@Test
 	void testDiv() {
@@ -134,9 +135,24 @@ class ComplexFunctionTest {
 		ComplexFunction complex2 = new ComplexFunction(s2);
 		ComplexFunction complex3 = new ComplexFunction(s3);
 				
-		assertEquals("mul(1,2)",s1.toString());
-		assertEquals("mul(mul(1,2),3)",s2.toString());
-		assertEquals("mul(1,mul(2,3))",s3.toString());	
+		System.out.println(complex1.toString());
+		System.out.println(complex2.toString());
+		System.out.println(complex3.toString());
+	
+		assertEquals("Times(1.0,2.0)",complex1.toString());
+		assertEquals("Times(Times(1.0,2.0),3.0)",complex2.toString());
+		assertEquals("Times(1.0,Times(2.0,3.0))",complex3.toString());	
+	}
+	@Test
+	void testCopy() {
+		
+		String s1 = "mul(1,mul(2,3))";
+	
+		function complex1 = new ComplexFunction(s1);
+		function complex2 = complex1.copy();
+		
+		System.out.println(complex2.toString());
+		
 	}
 
 }

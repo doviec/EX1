@@ -138,7 +138,7 @@ public class ComplexFunction implements complex_function {
 
 	@Override
 	public double f(double x) {
-		// TODO Auto-generated method stub
+
 		return 0;
 	}
 
@@ -158,8 +158,12 @@ public class ComplexFunction implements complex_function {
 
 	@Override
 	public function copy() {
-		// TODO Auto-generated method stub
-		return null;
+
+		ComplexFunction copy = new ComplexFunction();
+		copy.root = this.root;
+		copy.left = this.left;
+		copy.right = this.right;
+		return copy;
 	}
 
 	public void mathOperation(function f1, Operation op) {
@@ -179,25 +183,25 @@ public class ComplexFunction implements complex_function {
 
 		mathOperation(f1, Operation.Plus);
 	}
-	
+
 	@Override
 	public void mul(function f1) {
 
 		mathOperation(f1, Operation.Times);
 	}
-	
+
 	@Override
 	public void div(function f1) {
 
 		mathOperation(f1, Operation.Divid);
 	}
-	
+
 	@Override
 	public void max(function f1) {
 
 		mathOperation(f1, Operation.Max);
 	}
-	
+
 	@Override
 	public void min(function f1) {
 
@@ -227,15 +231,13 @@ public class ComplexFunction implements complex_function {
 	public String toString() {
 
 		StringBuilder sb = new StringBuilder();
-		if (left == null) {
-			return "";
+		if(this.root == Operation.None) {
+			return this.left.toString();
 		}
-		sb.append(left.toString());
-		sb.append(checkWhichString(root));
-		if(right != null) {
-			sb.append(right);
-		}
+			sb.append(this.root+ "(");
+			sb.append(this.left.toString() + ',');
+			sb.append(this.right.toString() + ')');
+		
 		return sb.toString();
 	}
-
 }

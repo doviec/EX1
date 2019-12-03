@@ -226,10 +226,15 @@ public class ComplexFunction implements complex_function {
 	}
 	public String toString() {
 
-		String ComplexFunctionString = "";
 		StringBuilder sb = new StringBuilder();
-
-
+		if (left == null) {
+			return "";
+		}
+		sb.append(left.toString());
+		sb.append(checkWhichString(root));
+		if(right != null) {
+			sb.append(right);
+		}
 		return sb.toString();
 	}
 

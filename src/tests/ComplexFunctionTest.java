@@ -152,7 +152,38 @@ class ComplexFunctionTest {
 		function complex2 = complex1.copy();
 		
 		System.out.println(complex2.toString());
+		//use equal to make sure it works
+	}
+	@Test
+	void testF() {
 		
+		String s1 = "x^3+5x-9+0"; 
+		String s2 = "mul(plus(2x,2),3x^2)";
+		String s3 = "div(plus(x^2,6x),mul(x,2))";    
+		String s4 = "mul(20,div(x^3+2,0)"; 
+		String s5 = "comp(x^2,x+1)";
+		String s6 = "max(mul(5x+2,0.25),div(2.2x,plus(1.2x,x)))";
+		
+		ComplexFunction complex1 = new ComplexFunction(s1);
+		ComplexFunction complex2 = new ComplexFunction(s2);
+		ComplexFunction complex3 = new ComplexFunction(s3);
+		ComplexFunction complex4 = new ComplexFunction(s4);
+		ComplexFunction complex5 = new ComplexFunction(s5);
+		ComplexFunction complex6 = new ComplexFunction(s6);
+		
+		double resultComplex1 = complex1.f(2);
+		double resultComplex2 = complex2.f(1);
+		double resultComplex3 = complex3.f(3);
+	//	double resultComplex4 = complex4.f(2);     divide by 0 check with try and catch
+		double resultComplex5 = complex5.f(2);
+		double resultComplex6 = complex6.f(1);
+		
+		assertEquals(9, resultComplex1);
+		assertEquals(12, resultComplex2);
+		assertEquals(4.5, resultComplex3);
+		
+		assertEquals(9, resultComplex5);
+		assertEquals(1.75, resultComplex6);
 	}
 
 }

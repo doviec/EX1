@@ -2,6 +2,8 @@ package myMath;
 
 import java.util.function.Function;
 
+import javax.management.RuntimeErrorException;
+
 public class ComplexFunction implements complex_function {
 
 	private Operation root = Operation.None;
@@ -44,7 +46,7 @@ public class ComplexFunction implements complex_function {
 			return Operation.Plus;
 		case ("mul"):
 			return Operation.Times;
-		case ("Comp"):
+		case ("comp"):
 			return Operation.Comp;
 		case ("div"):
 			return Operation.Divid;
@@ -139,7 +141,34 @@ public class ComplexFunction implements complex_function {
 	@Override
 	public double f(double x) {
 
-		return 0;
+		switch (this.root) {
+
+		case Plus :
+			return left.f(x) + right.f(x);
+		case Times :
+			return left.f(x) * right.f(x);
+		case Max :
+			return Math.max(left.f(x),right.f(x));
+		case Min :
+			return Math.min(left.f(x),right.f(x));
+		case Comp :
+			return left.f(right.f(x));
+		case Divid :
+			if (right.f(x) == 0) {
+				throw new ArithmeticException("Can't divide by zero");
+			}
+			return left.f(x) / right.f(x);
+		case None :
+			if (right == null) {
+				return left.f(x);
+			}else {
+				throw new RuntimeException("There is no Operation to calculate between the functions");
+			}
+		case Error :
+			throw new RuntimeException("Due to an Error no calculation may be done");
+		default :
+			return this.f(x);
+		}
 	}
 
 	@Override
@@ -234,10 +263,15 @@ public class ComplexFunction implements complex_function {
 		if(this.root == Operation.None) {
 			return this.left.toString();
 		}
-			sb.append(this.root+ "(");
-			sb.append(this.left.toString() + ',');
-			sb.append(this.right.toString() + ')');
-		
+		sb.append(this.root+ "(");
+		sb.append(this.left.toString() + ',');
+		sb.append(this.right.toString() + ')');
+
 		return sb.toString();
 	}
+	//	public boolean equals(Object obj) {
+	//		
+	//		
+	//	
+	//	}
 }

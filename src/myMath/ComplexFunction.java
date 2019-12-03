@@ -13,11 +13,17 @@ public class ComplexFunction implements complex_function {
 	}
 	public ComplexFunction(String string) {
 
-		ComplexFunction complexFunction = (ComplexFunction) initFromString(string);   //needs casting because init returns function (polynom or complex function)
-		this.root = complexFunction.getOp();
-		this.left = complexFunction.left();
-		this.right = complexFunction.right();
-
+		function function = initFromString(string);
+		if (function instanceof Polynom){
+			this.left = function;
+			this.root = Operation.None;
+			this.right = null;
+		} else {
+			ComplexFunction complexFunction = (ComplexFunction) function;   //needs casting because init returns function (polynom or complex function)
+			this.root = complexFunction.getOp();
+			this.left = complexFunction.left();
+			this.right = complexFunction.right();
+		}
 	}
 	public ComplexFunction(function f) {
 
@@ -58,17 +64,17 @@ public class ComplexFunction implements complex_function {
 		case Plus:
 			return "plus";
 		case Times:
-			return "times";
+			return "mul";
 		case Comp:
 			return "comp";
 		case Divid:
-			return "divide";
+			return "div";
 		case Max:
 			return "max";
 		case Min:
 			return "min";
 		case None:
-			return "no operation";
+			return "";
 		default :                     //maybe a runtime exception that not a valid operation 
 			return "error";
 		}
@@ -86,12 +92,11 @@ public class ComplexFunction implements complex_function {
 		}
 		catch (Exception exception) {
 		}
-		
 		int firstComma = string.indexOf(',');
 		int lastComma = string.lastIndexOf(',');
 		int firstBracket = string.indexOf('(');
-		
-		if (lastComma == firstComma) {               //if the string is a simple Complex as mul(x,x+2)etc then it returns it 
+
+		if (lastComma == firstComma) {                                    //if the string is a simple Complex as mul(x,x+2)etc then it returns it 
 			String lastOperation = string.substring(0,firstBracket);
 			Polynom f1 = new Polynom(string.substring(firstBracket+1, lastComma));
 			Polynom f2 = new Polynom(string.substring(lastComma+1, string.length()-1));
@@ -99,11 +104,6 @@ public class ComplexFunction implements complex_function {
 		}
 
 		int mainComma = findMainComma(string.substring(firstBracket+1));  //mainComma is the comma of the enum function (plus mul etc) that separates f1 and f2.
-		if (mainComma == -1) {
-			//throw exception
-			//
-			//
-		}
 		String operation = string.substring(0, firstBracket);
 		function left = buildComplexFromString(string.substring(firstBracket+1,mainComma + firstBracket+1));           //Recursive for f1 (left function)
 		function right = buildComplexFromString(string.substring(mainComma+2+firstBracket,string.length()-1));         //Recursive for f2 (right function)
@@ -145,14 +145,16 @@ public class ComplexFunction implements complex_function {
 	@Override
 	public function initFromString(String s) {
 
-		function complexFunction = null;
 		String trimmedString = s.replaceAll("\\s","");
-		if (!trimmedString.isEmpty()) {
-			complexFunction = buildComplexFromString(trimmedString);
+		if (trimmedString.isEmpty()) {
+			//exception
 		}
+		function f;
+		f = buildComplexFromString(trimmedString);
+		ComplexFunction complexFunction = new ComplexFunction(f);
+
 		return complexFunction;
 	}	
-
 
 	@Override
 	public function copy() {
@@ -160,65 +162,52 @@ public class ComplexFunction implements complex_function {
 		return null;
 	}
 
+	public void mathOperation(function f1, Operation op) {
+		if (this.right != null) {
+			this.left = copy();
+		}
+		root = op;
+		ComplexFunction complexFunction = (ComplexFunction)f1;
+		if (complexFunction.getOp() == Operation.None){
+			this.right = complexFunction.left();
+		} else {
+			this.right = f1;
+		}
+	}
 	@Override
 	public void plus(function f1) {
 
-		if (this.right != null) {
-			this.left = this;
-		}		
-		root = Operation.Plus;
-		this.right = f1;
+		mathOperation(f1, Operation.Plus);
 	}
-
-
+	
 	@Override
 	public void mul(function f1) {
 
-		if (this.right != null) {
-			this.left = this;
-		}		
-		root = Operation.Times;
-		this.right = f1;
+		mathOperation(f1, Operation.Times);
 	}
-
+	
 	@Override
 	public void div(function f1) {
 
-		if (this.right != null) {
-			this.left = this;
-		}		
-		root = Operation.Divid;
-		this.right = f1;
+		mathOperation(f1, Operation.Divid);
 	}
-
+	
 	@Override
 	public void max(function f1) {
 
-		if (this.right != null) {
-			this.left = this;
-		}		
-		root = Operation.Max;
-		this.right = f1;
+		mathOperation(f1, Operation.Max);
 	}
-
+	
 	@Override
 	public void min(function f1) {
 
-		if (this.right != null) {
-			this.left = this;
-		}		
-		root = Operation.Min;
-		this.right = f1;
+		mathOperation(f1, Operation.Min);
 	}
 
 	@Override
 	public void comp(function f1) {
 
-		if (this.right != null) {
-			this.left = this;
-		}		
-		root = Operation.Comp;
-		this.right = f1;
+		mathOperation(f1, Operation.Comp);
 	}
 
 	@Override
@@ -236,12 +225,12 @@ public class ComplexFunction implements complex_function {
 		return this.root;
 	}
 	public String toString() {
-		
+
 		String ComplexFunctionString = "";
 		StringBuilder sb = new StringBuilder();
-		
 
-		return ComplexFunctionString;
+
+		return sb.toString();
 	}
 
 }

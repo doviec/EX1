@@ -81,9 +81,9 @@ public class Polynom implements Polynom_able{
 			monomsMap.remove(m1.get_power());
 		}
 	}
-/**
- * adds to our Polynom a given polynom_able
- */
+	/**
+	 * adds to our Polynom a given polynom_able
+	 */
 	@Override
 	public void add(Polynom_able p1) {
 		Iterator<Monom> iterator = p1.iteretor();
@@ -124,9 +124,9 @@ public class Polynom implements Polynom_able{
 		Monom negative = new Monom(-1 * m1.get_coefficient(), m1.get_power());
 		add(negative);
 	}
-/**
- * subtracts a polynom from the polynom
- */
+	/**
+	 * subtracts a polynom from the polynom
+	 */
 	@Override
 	public void substract(Polynom_able p1) {              
 		Iterator<Monom> iterator = p1.iteretor();
@@ -135,9 +135,9 @@ public class Polynom implements Polynom_able{
 			subtract(m);
 		}
 	}	
-/**
- * adds a polynom to a polynom.
- */
+	/**
+	 * adds a polynom to a polynom.
+	 */
 	@Override 
 	public void multiply(Polynom_able p1) {
 		Polynom p2 = new Polynom();
@@ -151,9 +151,9 @@ public class Polynom implements Polynom_able{
 		}
 		monomsMap = p2.monomsMap;
 	}
-/**
- * checks if two polynoms are equal.
- */
+	/**
+	 * checks if two polynoms are equal.
+	 */
 	public boolean equals(Polynom_able p1) {
 		Iterator<Monom> iterator = p1.iteretor();
 		int count = 0;
@@ -174,21 +174,21 @@ public class Polynom implements Polynom_able{
 
 		return true;
 	}
-/**
- * checks if the polynom is zero
- */
+	/**
+	 * checks if the polynom is zero
+	 */
 	@Override
 	public boolean isZero() {
 
 		return (monomsMap.size() == 0);
 	}
-/**
- * gets two double values and epsilon and returns if there is a value between the two that gives us zero if we send it to f(x) and is smaller then epsilon.
- */
+	/**
+	 * gets two double values and epsilon and returns if there is a value between the two that gives us zero if we send it to f(x) and is smaller then epsilon.
+	 */
 	@Override
 	public double root(double x0, double x1, double eps) { 
 
-			if (this.f(x0) * this.f(x1) == 0) {
+		if (this.f(x0) * this.f(x1) == 0) {
 			if (this.f(x0) == 0) {
 				return x0;
 			}
@@ -220,9 +220,9 @@ public class Polynom implements Polynom_able{
 
 		return smallThenEps;
 	}
-/**
- * this method returns a polynom_able which is a copy of our polynom.
- */
+	/**
+	 * this method returns a polynom_able which is a copy of our polynom.
+	 */
 	@Override
 	public Polynom_able copy() {
 		Polynom_able polynom_able = new Polynom();
@@ -233,9 +233,9 @@ public class Polynom implements Polynom_able{
 		}
 		return polynom_able;
 	}
-/**
- * returns the polynom with its derivative values.
- */
+	/**
+	 * returns the polynom with its derivative values.
+	 */
 	@Override
 	public Polynom_able derivative() {                      
 		Polynom_able polynom_able = new Polynom();
@@ -247,9 +247,9 @@ public class Polynom implements Polynom_able{
 		}
 		return polynom_able;
 	}
-/**
- * gets two double values abd epsilon and returns the are of the function between and the x axis.
- */
+	/**
+	 * gets two double values abd epsilon and returns the are of the function between and the x axis.
+	 */
 	@Override
 	public double area(double x0, double x1, double eps) {
 
@@ -266,9 +266,9 @@ public class Polynom implements Polynom_able{
 
 		return sumArea;
 	}
-/**
- * ()-with this method we may iterate through  hashmap or polynom etc. and get its values (monom etc.).
- */
+	/**
+	 * ()-with this method we may iterate through  hashmap or polynom etc. and get its values (monom etc.).
+	 */
 	@Override
 	public Iterator<Monom> iteretor() {
 
@@ -291,10 +291,10 @@ public class Polynom implements Polynom_able{
 		};
 
 	}
-/**
- * this method is used to copy a hashmap to an arraylist. Used for the iterator function to prevent us from trying to acsses  data which does not exist (null).
- * @return
- */
+	/**
+	 * this method is used to copy a hashmap to an arraylist. Used for the iterator function to prevent us from trying to acsses  data which does not exist (null).
+	 * @return
+	 */
 	private ArrayList<Monom> convertMapToList() {
 		ArrayList<Monom> list = new ArrayList<Monom>();
 		for (Map.Entry<Integer, Monom> entry : monomsMap.entrySet()) {
@@ -316,9 +316,9 @@ public class Polynom implements Polynom_able{
 		}
 		this.monomsMap = p.monomsMap;
 	}
-/**
- * this method prints our Polynom
- */
+	/**
+	 * this method prints our Polynom
+	 */
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -338,11 +338,11 @@ public class Polynom implements Polynom_able{
 		}
 		return polynomStr;
 
-	}
-@Override
-public function initFromString(String s) {
-	// TODO Auto-generated method stub
-	return null;
-}
 
+	}
+	@Override
+	public function initFromString(String s) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -179,11 +179,11 @@ public class ComplexFunction implements complex_function {
 			this.left = copy();
 		}
 		root = op;
-		ComplexFunction complexFunction = (ComplexFunction)f1;
+		ComplexFunction complexFunction = (ComplexFunction) f1.copy();
 		if (complexFunction.getOp() == Operation.None){
 			this.right = complexFunction.left();
 		} else {
-			this.right = f1;
+			this.right = f1.copy();
 		}
 	}
 	@Override

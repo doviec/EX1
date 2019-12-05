@@ -237,6 +237,31 @@ class ComplexFunctionTest {
 		assertEquals(7.375, resultComplex4);
 		assertEquals(10.2400000, resultComplex5,0.00001);
 	}
+	@Test
+	void testEquals() {
+		
+		String s1 = "x^2";
+		String s2 = "mul(x,x)";
+		String s3 = "mul(1,2)"; 
+		String s4 = "plus(4,mul(5x+2,x^5))";
+		String s5 = "plus(mul(x^5,5x+2),4)";
+		ComplexFunction complex1 = (ComplexFunction)new ComplexFunction().initFromString(s1);
+		ComplexFunction complex2 = (ComplexFunction)new ComplexFunction().initFromString(s2);
+		ComplexFunction complex3 = (ComplexFunction)new ComplexFunction().initFromString(s3);
+		ComplexFunction complex4 = (ComplexFunction)new ComplexFunction().initFromString(s4);
+		ComplexFunction complex5 = (ComplexFunction)new ComplexFunction().initFromString(s5);
+		
+		boolean check1 = complex1.equals(complex2);
+		boolean check2 = complex5.equals(complex4);
+		boolean check3 = complex1.equals(complex2);
+		boolean check4 = complex1.equals(complex2);
+		boolean check5 = complex1.equals(s2);
+		
+		assertEquals(true, check1);
+		assertEquals(true, check2);
+		assertEquals(false, check5);
+		
+	}
 
 }
 

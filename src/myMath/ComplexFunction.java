@@ -242,12 +242,11 @@ public class ComplexFunction implements complex_function {
 	}
 	public boolean equals(Object obj) {
 		
-	
 		if (!((obj instanceof ComplexFunction)||(obj instanceof Polynom)||(obj instanceof Monom))) {
 			return false;
 		}else {
 			ComplexFunction complexFunction = new ComplexFunction((function) obj);
-			for(double i = -10; i<=10; i+=0.1){                       //checks if the functions are equal in range between [-10,10] with jumps of 0.1
+			for(double i = -10; i<=10; i+=0.1){                           //checks if the functions are equal in range between [-10,10] with jumps of 0.1
 				if(complexFunction.f(i) != this.f(i)) {
 					return false;
 				}

@@ -240,6 +240,7 @@ class ComplexFunctionTest {
 	@Test
 	void testEquals() {
 		
+		char c1 = 'g';
 		String s1 = "x^2";
 		String s2 = "mul(x,x)";
 		String s3 = "mul(1,2)"; 
@@ -253,14 +254,19 @@ class ComplexFunctionTest {
 		
 		boolean check1 = complex1.equals(complex2);
 		boolean check2 = complex5.equals(complex4);
-		boolean check3 = complex1.equals(complex2);
-		boolean check4 = complex1.equals(complex2);
-		boolean check5 = complex1.equals(s2);
-		
+		boolean check3 = complex3.equals(complex3);
+						
 		assertEquals(true, check1);
 		assertEquals(true, check2);
-		assertEquals(false, check5);
+		assertEquals(true, check3);
 		
+		boolean check5 = complex1.equals(s2);
+		boolean check6 = complex1.equals(c1);
+		boolean check7 = complex3.equals(complex5);
+		
+		assertEquals(false, check5);
+		assertEquals(false, check6);
+		assertEquals(false, check7);
 	}
 
 }

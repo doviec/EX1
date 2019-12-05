@@ -13,20 +13,6 @@ public class ComplexFunction implements complex_function {
 	public ComplexFunction() {
 
 	}
-	public ComplexFunction(String string) {
-
-		function function = initFromString(string);
-		if (function instanceof Polynom){
-			this.left = function;
-			this.root = Operation.None;
-			this.right = null;
-		} else {
-			ComplexFunction complexFunction = (ComplexFunction) function;   //needs casting because init returns function (polynom or complex function)
-			this.root = complexFunction.getOp();
-			this.left = complexFunction.left();
-			this.right = complexFunction.right();
-		}
-	}
 	public ComplexFunction(function f) {
 
 		this.root = Operation.None;
@@ -56,7 +42,7 @@ public class ComplexFunction implements complex_function {
 			return Operation.Min;
 		case (""):
 			return Operation.None;
-		default :                     //maybe a runtime exception that not a valid operation 
+		default :                      
 			return Operation.Error;
 		}
 	}
@@ -77,7 +63,7 @@ public class ComplexFunction implements complex_function {
 			return "min";
 		case None:
 			return "";
-		default :                     //maybe a runtime exception that not a valid operation 
+		default :                     
 			return "error";
 		}
 	}
@@ -114,7 +100,6 @@ public class ComplexFunction implements complex_function {
 
 		return comlexFunction;
 	}
-
 	/**
 	 * finds the comma that belongs to its Operation in the beginning of the string
 	 * @param string
@@ -137,7 +122,6 @@ public class ComplexFunction implements complex_function {
 		}
 		return -1;
 	}
-
 	@Override
 	public double f(double x) {
 
@@ -170,7 +154,6 @@ public class ComplexFunction implements complex_function {
 			return this.f(x);
 		}
 	}
-
 	@Override
 	public function initFromString(String s) {
 
@@ -178,23 +161,19 @@ public class ComplexFunction implements complex_function {
 		if (trimmedString.isEmpty()) {
 			//exception
 		}
-		function f;
-		f = buildComplexFromString(trimmedString);
-		ComplexFunction complexFunction = new ComplexFunction(f);
-
-		return complexFunction;
+		function function = buildComplexFromString(trimmedString);
+		if (function instanceof Polynom){
+			ComplexFunction complexFunction = new ComplexFunction(function);
+			return complexFunction;
+		} 
+		return function;	
 	}	
-
 	@Override
 	public function copy() {
 
-		ComplexFunction copy = new ComplexFunction();
-		copy.root = this.root;
-		copy.left = this.left;
-		copy.right = this.right;
+		ComplexFunction copy = new ComplexFunction(checkWhichString(getOp()),left(),right());
 		return copy;
 	}
-
 	public void mathOperation(function f1, Operation op) {
 		if (this.right != null) {
 			this.left = copy();
@@ -212,47 +191,39 @@ public class ComplexFunction implements complex_function {
 
 		mathOperation(f1, Operation.Plus);
 	}
-
 	@Override
 	public void mul(function f1) {
 
 		mathOperation(f1, Operation.Times);
 	}
-
 	@Override
 	public void div(function f1) {
 
 		mathOperation(f1, Operation.Divid);
 	}
-
 	@Override
 	public void max(function f1) {
 
 		mathOperation(f1, Operation.Max);
 	}
-
 	@Override
 	public void min(function f1) {
 
 		mathOperation(f1, Operation.Min);
 	}
-
 	@Override
 	public void comp(function f1) {
 
 		mathOperation(f1, Operation.Comp);
 	}
-
 	@Override
 	public function left() {
 		return this.left;
 	}
-
 	@Override
 	public function right() {
 		return this.right;
 	}
-
 	@Override
 	public Operation getOp() {
 		return this.root;

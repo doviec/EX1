@@ -14,12 +14,14 @@ class ComplexFunctionTest {
 		String s1 = "div(plus(-1.0x^4 +2.4x^2 +3.1,+0.1x^5 -1.2999999999999998x +5.0),-1.0x^4 +2.4x^2 +3.1)"; 
 		String s2 = "mul(mul(1,2),3)";
 		String s3 = "mul(1,mul(2,3))";
-		
-		ComplexFunction complex1 = new ComplexFunction(s1);
-		ComplexFunction complex2 = new ComplexFunction(s2);
-		ComplexFunction complex3 = new ComplexFunction(s3);
+				
+		ComplexFunction complex1 = (ComplexFunction)new ComplexFunction().initFromString(s1);
+		ComplexFunction complex2 = (ComplexFunction)new ComplexFunction().initFromString(s2);
+		ComplexFunction complex3 = (ComplexFunction)new ComplexFunction().initFromString(s3);	
 		
 		System.out.println(complex1.toString());
+		System.out.println(complex2.toString());
+		System.out.println(complex3.toString());
 		
 	}
 	@Test
@@ -30,14 +32,20 @@ class ComplexFunctionTest {
 		String s3 = "mul(1,2)"; 
 		String s4 = "plus(4,mul(5x+2,x^5))";
 		
-		ComplexFunction complex1 = new ComplexFunction(s1);
-		ComplexFunction complex2 = new ComplexFunction(s2);
-		ComplexFunction complex3 = new ComplexFunction(s3);
-		ComplexFunction complex4 = new ComplexFunction(s4);
-
+		ComplexFunction complex1 = (ComplexFunction)new ComplexFunction().initFromString(s1);
+		ComplexFunction complex2 = (ComplexFunction)new ComplexFunction().initFromString(s2);
+		ComplexFunction complex3 = (ComplexFunction)new ComplexFunction().initFromString(s3);
+		ComplexFunction complex4 = (ComplexFunction)new ComplexFunction().initFromString(s4);
+		
 		complex1.plus(complex2);
-		complex3.plus(complex2);
-		complex2.plus(complex4);
+		complex2.plus(complex3);
+		complex3.plus(complex4);
+
+		assertEquals(Operation.Plus, complex1.getOp());
+		
+		assertEquals(12, complex1.f(3));
+		assertEquals(5.5, complex2.f(3.5));
+		assertEquals(770.0617676, complex3.f(2.25));
 	}
 	@Test
 	void testMul() {
@@ -47,14 +55,15 @@ class ComplexFunctionTest {
 		String s3 = "mul(1,2)"; 
 		String s4 = "plus(4,mul(5x+2,x^5))";
 		
-		ComplexFunction complex1 = new ComplexFunction(s1);
-		ComplexFunction complex2 = new ComplexFunction(s2);
-		ComplexFunction complex3 = new ComplexFunction(s3);
-		ComplexFunction complex4 = new ComplexFunction(s4);
+		ComplexFunction complex1 = (ComplexFunction)new ComplexFunction().initFromString(s1);
+		ComplexFunction complex2 = (ComplexFunction)new ComplexFunction().initFromString(s2);
+		ComplexFunction complex3 = (ComplexFunction)new ComplexFunction().initFromString(s3);
+		ComplexFunction complex4 = (ComplexFunction)new ComplexFunction().initFromString(s4);
 
-		complex1.div(complex2);
+		complex1.mul(complex2);
 		complex3.mul(complex2);
 		complex2.mul(complex4);
+		
 		System.out.println(complex1.toString());
 	}
 	@Test
@@ -65,10 +74,10 @@ class ComplexFunctionTest {
 		String s3 = "mul(1,2)"; 
 		String s4 = "plus(4,mul(5x+2,x^5))";
 		
-		ComplexFunction complex1 = new ComplexFunction(s1);
-		ComplexFunction complex2 = new ComplexFunction(s2);
-		ComplexFunction complex3 = new ComplexFunction(s3);
-		ComplexFunction complex4 = new ComplexFunction(s4);
+		ComplexFunction complex1 = (ComplexFunction)new ComplexFunction().initFromString(s1);
+		ComplexFunction complex2 = (ComplexFunction)new ComplexFunction().initFromString(s2);
+		ComplexFunction complex3 = (ComplexFunction)new ComplexFunction().initFromString(s3);
+		ComplexFunction complex4 = (ComplexFunction)new ComplexFunction().initFromString(s4);
 
 		complex1.div(complex2);
 		complex3.div(complex2);
@@ -82,14 +91,14 @@ class ComplexFunctionTest {
 		String s3 = "mul(1,2)"; 
 		String s4 = "plus(4,mul(5x+2,x^5))";
 		
-		ComplexFunction complex1 = new ComplexFunction(s1);
-		ComplexFunction complex2 = new ComplexFunction(s2);
-		ComplexFunction complex3 = new ComplexFunction(s3);
-		ComplexFunction complex4 = new ComplexFunction(s4);
+		ComplexFunction complex1 = (ComplexFunction)new ComplexFunction().initFromString(s1);
+		ComplexFunction complex2 = (ComplexFunction)new ComplexFunction().initFromString(s2);
+		ComplexFunction complex3 = (ComplexFunction)new ComplexFunction().initFromString(s3);
+		ComplexFunction complex4 = (ComplexFunction)new ComplexFunction().initFromString(s4);
 
 		complex1.max(complex2);
-		complex3.max(complex2);
 		complex2.max(complex4);
+		complex3.max(complex2);
 	}
 	@Test
 	void testMin() {
@@ -99,10 +108,10 @@ class ComplexFunctionTest {
 		String s3 = "mul(1,2)"; 
 		String s4 = "plus(4,mul(5x+2,x^5))";
 		
-		ComplexFunction complex1 = new ComplexFunction(s1);
-		ComplexFunction complex2 = new ComplexFunction(s2);
-		ComplexFunction complex3 = new ComplexFunction(s3);
-		ComplexFunction complex4 = new ComplexFunction(s4);
+		ComplexFunction complex1 = (ComplexFunction)new ComplexFunction().initFromString(s1);
+		ComplexFunction complex2 = (ComplexFunction)new ComplexFunction().initFromString(s2);
+		ComplexFunction complex3 = (ComplexFunction)new ComplexFunction().initFromString(s3);
+		ComplexFunction complex4 = (ComplexFunction)new ComplexFunction().initFromString(s4);
 
 		complex1.min(complex2);
 		complex3.min(complex2);
@@ -116,10 +125,10 @@ class ComplexFunctionTest {
 		String s3 = "mul(1,2)"; 
 		String s4 = "plus(4,mul(5x+2,x^5))";
 		
-		ComplexFunction complex1 = new ComplexFunction(s1);
-		ComplexFunction complex2 = new ComplexFunction(s2);
-		ComplexFunction complex3 = new ComplexFunction(s3);
-		ComplexFunction complex4 = new ComplexFunction(s4);
+		ComplexFunction complex1 = (ComplexFunction)new ComplexFunction().initFromString(s1);
+		ComplexFunction complex2 = (ComplexFunction)new ComplexFunction().initFromString(s2);
+		ComplexFunction complex3 = (ComplexFunction)new ComplexFunction().initFromString(s3);
+		ComplexFunction complex4 = (ComplexFunction)new ComplexFunction().initFromString(s4);
 
 		complex1.comp(complex2);
 		complex3.comp(complex2);
@@ -131,9 +140,9 @@ class ComplexFunctionTest {
 		String s2 = "mul(mul(1,2),3)";
 		String s3 = "mul(1,mul(2,3))";
 		
-		ComplexFunction complex1 = new ComplexFunction(s1);
-		ComplexFunction complex2 = new ComplexFunction(s2);
-		ComplexFunction complex3 = new ComplexFunction(s3);
+		ComplexFunction complex1 = (ComplexFunction)new ComplexFunction().initFromString(s1);
+		ComplexFunction complex2 = (ComplexFunction)new ComplexFunction().initFromString(s2);
+		ComplexFunction complex3 = (ComplexFunction)new ComplexFunction().initFromString(s3);
 				
 		System.out.println(complex1.toString());
 		System.out.println(complex2.toString());
@@ -148,7 +157,7 @@ class ComplexFunctionTest {
 		
 		String s1 = "mul(1,mul(2,3))";
 	
-		function complex1 = new ComplexFunction(s1);
+		ComplexFunction complex1 = (ComplexFunction)new ComplexFunction().initFromString(s1);
 		function complex2 = complex1.copy();
 		
 		System.out.println(complex2.toString());
@@ -164,12 +173,12 @@ class ComplexFunctionTest {
 		String s5 = "comp(x^2,x+1)";
 		String s6 = "max(mul(5x+2,0.25),div(2.2x,plus(1.2x,x)))";
 		
-		ComplexFunction complex1 = new ComplexFunction(s1);
-		ComplexFunction complex2 = new ComplexFunction(s2);
-		ComplexFunction complex3 = new ComplexFunction(s3);
-		ComplexFunction complex4 = new ComplexFunction(s4);
-		ComplexFunction complex5 = new ComplexFunction(s5);
-		ComplexFunction complex6 = new ComplexFunction(s6);
+		ComplexFunction complex1 = (ComplexFunction)new ComplexFunction().initFromString(s1);
+		ComplexFunction complex2 = (ComplexFunction)new ComplexFunction().initFromString(s2);
+		ComplexFunction complex3 = (ComplexFunction)new ComplexFunction().initFromString(s3);
+		ComplexFunction complex4 = (ComplexFunction)new ComplexFunction().initFromString(s4);
+		ComplexFunction complex5 = (ComplexFunction)new ComplexFunction().initFromString(s5);
+		ComplexFunction complex6 = (ComplexFunction)new ComplexFunction().initFromString(s6);
 		
 		double resultComplex1 = complex1.f(2);
 		double resultComplex2 = complex2.f(1);

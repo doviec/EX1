@@ -242,7 +242,7 @@ class ComplexFunctionTest {
 		
 		char c1 = 'g';
 		String s1 = "x^2";
-		String s2 = "mul(x,x)";
+		String s2 = "mul(x,x)"; 
 		String s3 = "mul(1,2)"; 
 		String s4 = "plus(4,mul(5x+2,x^5))";
 		String s5 = "plus(mul(x^5,5x+2),4)";

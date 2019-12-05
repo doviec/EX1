@@ -240,7 +240,7 @@ public class ComplexFunction implements complex_function {
 
 		return sb.toString();
 	}
-	public boolean equals(Object obj) {
+	public boolean equals(Object obj) { 
 		
 		if (!((obj instanceof ComplexFunction)||(obj instanceof Polynom)||(obj instanceof Monom))) {
 			return false;

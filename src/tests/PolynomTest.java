@@ -14,7 +14,6 @@ import myMath.function;
 
 class PolynomTest {
 
-
 	@Test
 	void testF() {
 		String string1 ="3x^2- 2x^4 +3";
@@ -36,7 +35,6 @@ class PolynomTest {
 		assertEquals(0,value2);
 		assertEquals(2,value3);
 		assertEquals(0,value4);
-
 	}
 	
 	@Test
@@ -68,8 +66,6 @@ class PolynomTest {
 		assertEquals(3, hashMap.get(3).get_coefficient());
 		assertEquals(2, hashMap.get(2).get_coefficient());
 		assertEquals(-6, hashMap.get(0).get_coefficient());
-
-
 	}
 
 	@Test
@@ -127,8 +123,6 @@ class PolynomTest {
 		assertEquals(-3, hashMap.get(3).get_coefficient());
 		assertEquals(2, hashMap.get(2).get_coefficient());
 		assertEquals(12, hashMap.get(0).get_coefficient());
-
-
 	}
 
 	@Test
@@ -154,7 +148,6 @@ class PolynomTest {
 		assertNotNull(hash.get(2));
 		assertNotNull(hash.get(0));
 
-
 		assertEquals(3, hash.get(2).get_coefficient());
 		assertEquals(3, hash.get(0).get_coefficient());
 	}
@@ -177,9 +170,6 @@ class PolynomTest {
 			Monom m = iterator.next();
 			hashMap.put(m.get_power(),m);
 		}
-
-
-
 		assertNotNull(hashMap.get(5));
 		assertNotNull(hashMap.get(4));
 		assertNotNull(hashMap.get(3));
@@ -219,14 +209,14 @@ class PolynomTest {
 		boolean isEqual4 = polynom2.equals(polynom4); 
 		boolean isEqual5 = polynom6.equals(polynom5); 
 
-
 		assertEquals(true, isEqual1);
 		assertEquals(false, isEqual2);
 		assertEquals(false, isEqual3);
 		assertEquals(false, isEqual4);
 		assertEquals(true, isEqual5);
-
-
+		
+		assertFalse(polynom1.equals(true));
+		assertFalse(polynom5.equals(string3));
 	}
 
 	@Test
@@ -247,9 +237,7 @@ class PolynomTest {
 		assertEquals(false, isZero1);
 		assertEquals(true, isZero2);
 		assertEquals(true, isZero3);
-
 	}
-
 	@Test
 	void testRoot() {
 
@@ -270,27 +258,23 @@ class PolynomTest {
 		answerRoot1 = polynom1.root(x0, x1, Monom.EPSILON);
 		answerRoot2 = polynom2.root(x2, x3, Monom.EPSILON);
 
-
 		assertEquals(3, answerRoot1, 0.0001);
 		assertEquals(0, answerRoot2, 0.0001);
-
 	}
-
 	@Test
 	void testCopy() {
 
 		String string1 ="9-x^2";
 
 		Polynom_able polynom_able1 = new Polynom(string1);
-		function polynom_able2 = polynom_able1.copy();
+		Polynom_able polynom_able2 = (Polynom_able) polynom_able1.copy();
 
 		polynom_able1.toString();
 		polynom_able2.toString();
-
+		
+		polynom_able1.equals(polynom_able2);
 		assertEquals(true, polynom_able1.equals(polynom_able2));
 	}
-
-
 	@Test
 	void testDerivative() {
 
@@ -299,7 +283,6 @@ class PolynomTest {
 		Polynom_able polynom_able1 = new Polynom(string1);
 		Polynom_able polynom_able2 = polynom_able1.derivative();
 
-
 		HashMap<Integer, Monom> hashMonom = new HashMap<>();
 		Iterator<Monom> iterator = polynom_able2.iteretor();
 
@@ -307,8 +290,6 @@ class PolynomTest {
 			Monom m = iterator.next();
 			hashMonom.put(m.get_power(),m);
 		}
-
-
 		assertNotNull(hashMonom.get(5));
 		assertNotNull(hashMonom.get(2));
 		assertNotNull(hashMonom.get(0));
@@ -316,9 +297,7 @@ class PolynomTest {
 		assertEquals(6,hashMonom.get(5).get_coefficient() );
 		assertEquals(12,hashMonom.get(2).get_coefficient() );
 		assertEquals(-1,hashMonom.get(0).get_coefficient() );
-
 	}
-
 	@Test
 	void testArea() {
 		String string1 ="x^3 + 2";
@@ -353,13 +332,11 @@ class PolynomTest {
 		assertEquals(5, countMonoms);
 		assertTrue(polynom1.equals(polynom2));
 	}
-
 	@Test
 	void testMultiplyMonom() {
 
 		String s1 ="-2x^2";
 		String s2 ="3x^2- 2x^4 -3x";
-
 
 		Monom m1 = new Monom(s1);
 		Polynom p2 = new Polynom(s2);
@@ -378,11 +355,9 @@ class PolynomTest {
 		assertNotNull(hash.get(4));
 		assertNotNull(hash.get(3));
 
-
 		assertEquals(4, hash.get(6).get_coefficient());
 		assertEquals(-6, hash.get(4).get_coefficient());	
 		assertEquals(6, hash.get(3).get_coefficient());	
-
 	}
 
 	@Test
@@ -393,8 +368,6 @@ class PolynomTest {
 		Polynom p2 = new Polynom(s1);
 		System.out.println(p2);
 		assertEquals("6.0x^1-2.0x^2",p2.toString() );
-
-
 	}
 
 }

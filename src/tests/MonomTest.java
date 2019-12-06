@@ -10,7 +10,34 @@ import myMath.Monom;
 class MonomTest {
 
 
+	@Test
+	void testMonom() {
+		String Str1 = "x^5";
+		String Str2 = "2x^3";
 
+		String Str3 = "@@##@";
+		String Str4 = "4..5";
+
+		boolean thrown3 = false;
+		boolean thrown4 = false;
+
+		Monom monom1 = new Monom(Str1);
+		Monom monom2 = new Monom(Str2);
+
+		try {
+			Monom monom3 = new Monom(Str3);
+		}catch (Exception e) {
+			thrown3 = true;
+		}
+		assertTrue(thrown3);
+		try {
+			Monom monom4 = new Monom(Str4);
+		}catch (Exception e) {
+			thrown4 = true;
+		}
+		assertTrue(thrown4);
+
+	}
 	@Test
 	void testDerivative() {
 		String Str1 = "x^5";
@@ -20,11 +47,11 @@ class MonomTest {
 		Monom monom1 = new Monom(Str1);
 		Monom monom2 = new Monom(Str2);
 		Monom monom3 = new Monom(Str3);
-		
+
 		monom1 = monom1.derivative();
 		monom2 = monom2.derivative();
 		monom3 = monom3.derivative();
-		
+
 		assertEquals(4, monom1.get_power());
 		assertEquals(5, monom1.get_coefficient());
 		assertEquals(2, monom2.get_power());
@@ -33,11 +60,6 @@ class MonomTest {
 		assertEquals(1, monom3.get_coefficient());
 
 	}
-
-
-
-
-
 	@Test
 	void testMonomString() {
 		String monomStr = "x^5";
@@ -58,14 +80,13 @@ class MonomTest {
 		assertEquals(5, monom1.get_power());
 		assertEquals(8, monom1.get_coefficient());
 	}
-
+	
 	@Test
 	void testSubtract() {
 		String monomStr1 = "8x^5";
 		Monom monom1 = new Monom(monomStr1);
 		String monomStr2 = "7x^5";
 		Monom monom2 = new Monom(monomStr2);
-		
 
 		monom1.subtract(monom2);
 
@@ -89,6 +110,16 @@ class MonomTest {
 		assertEquals(12, monom1.get_coefficient());
 		assertEquals(3, monom2.get_power());
 		assertEquals(8, monom2.get_coefficient());
+	}
+	@Test
+	void testEquals() {
+		String monomStr1 = "7x^5";
+		Monom monom1 = new Monom(monomStr1);
+		String monomStr2 = "7x^5";
+		Monom monom2 = new Monom(monomStr2);
+		
+		assertTrue(monom1.equals(monom2));
+		assertFalse(monom1.equals(monomStr2));
 	}
 
 }

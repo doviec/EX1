@@ -92,7 +92,6 @@ public class Polynom implements Polynom_able{
 			add(m);
 		}
 	}
-
 	/**
 	 * adds a monom to our polynom & deletes it if its zero
 	 */
@@ -102,7 +101,6 @@ public class Polynom implements Polynom_able{
 			Monom monom = monomsMap.get(m1.get_power());
 			if (monom == null) {
 				monomsMap.put(m1.get_power(), m1);
-
 			}else {
 				if (m1.get_power() == monom.get_power()) {
 					if (m1.get_coefficient() + monom.get_coefficient() == 0)
@@ -154,25 +152,27 @@ public class Polynom implements Polynom_able{
 	/**
 	 * checks if two polynoms are equal.
 	 */
-	public boolean equals(Polynom_able p1) {
-		Iterator<Monom> iterator = p1.iteretor();
-		int count = 0;
-		while (iterator.hasNext()) {
-			Monom m = iterator.next();
-			count++;
-			if (monomsMap.get(m.get_power()) == null) {             
-				return false;
-			}else {
-				if (!m.equals(monomsMap.get(m.get_power()))) {          
+	public boolean equals(Object obj) {
+		if (obj instanceof Polynom_able || obj instanceof Monom) {
+			Iterator<Monom> iterator = ((Polynom) obj).iteretor();
+			int count = 0;
+			while (iterator.hasNext()) {
+				Monom m = iterator.next();
+				count++;
+				if (monomsMap.get(m.get_power()) == null) {             
 					return false;
+				}else {
+					if (!m.equals(monomsMap.get(m.get_power()))) {          
+						return false;
+					}
 				}
 			}
+			if (monomsMap.size() != count) {
+				return false;
+			}
+			return true;
 		}
-		if (monomsMap.size() != count) {
-			return false;
-		}
-
-		return true;
+		else return false;
 	}
 	/**
 	 * checks if the polynom is zero
@@ -202,11 +202,9 @@ public class Polynom implements Polynom_able{
 		if (f(0) == 0) {
 			return 0;
 		}
-
 		if (this.f(x0) * this.f(x1) > 0) {
 			throw new RuntimeException("The values x0 and x1 arn't correct");
 		}
-
 		double smallThenEps=((x0+x1)/2);
 		while (Math.abs(this.f(smallThenEps))>eps) {
 			if (this.f(smallThenEps)*this.f(x0)<0) {
@@ -337,12 +335,9 @@ public class Polynom implements Polynom_able{
 			polynomStr = sb.toString();
 		}
 		return polynomStr;
-
-
 	}
 	@Override
 	public function initFromString(String s) {
-		// TODO Auto-generated method stub
-		return null;
+		return new Polynom(s);
 	}
 }

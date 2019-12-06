@@ -117,7 +117,6 @@ public class Monom implements function {
 		} else {
 			set_coefficient(this.get_coefficient() + m.get_coefficient());
 		}
-
 	}
 	/**
 	 * this method subtracts two monoms to one single monom only if they hold the same power
@@ -131,7 +130,6 @@ public class Monom implements function {
 		} else {
 			set_coefficient(this.get_coefficient() - m.get_coefficient());
 		}
-
 	}
 	/**
 	 * this method multiplies two monoms to one single monom.
@@ -147,17 +145,18 @@ public class Monom implements function {
 	 * @param m
 	 * @return
 	 */
-	public boolean equals (Monom m) {
+	public boolean equals (Object obj) {
 
-		double eps = m.get_coefficient()-this.get_coefficient();
-		if(Math.abs(eps) <= EPSILON && this.get_power() == m.get_power())
-		{
-			return true;
-		}
-		else {
-			return false;
-		}
-	
+		if (obj instanceof Monom) {
+			double eps = ((Monom) obj).get_coefficient()-this.get_coefficient();
+			if(Math.abs(eps) <= EPSILON && this.get_power() == ((Monom) obj).get_power())
+			{
+				return true;
+			}
+			else {
+				return false;
+			}
+		}else return false;
 	}
 	/**
 	 * this method prints the monom
@@ -170,7 +169,6 @@ public class Monom implements function {
 		}
 		return sb.toString();
 	}
-
 	// ****************** Private Methods and Data *****************
 	/**
 	 * this method checks if our string represents a valid monom (for example, may have spaces but not characters that aren’t mathematics).
@@ -213,7 +211,6 @@ public class Monom implements function {
 				}
 			}
 		}
-
 		return true;
 	}
 	/**
@@ -244,7 +241,6 @@ public class Monom implements function {
 
 		}
 		return Double.valueOf(expression);
-
 	}
 
 	private void set_coefficient(double a) {
@@ -267,13 +263,12 @@ public class Monom implements function {
 
 	@Override
 	public function initFromString(String s) {
-		// TODO Auto-generated method stub
-		return null;
+		return new Monom(s);
 	}
 
 	@Override
 	public function copy() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Monom(get_coefficient(), get_power());
+
 	}
 }

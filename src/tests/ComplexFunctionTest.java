@@ -230,7 +230,6 @@ class ComplexFunctionTest {
 			fail("can't divide by zero ");
 		}catch (Exception e) {
 		}
-
 		assertEquals(9, resultComplex1);
 		assertEquals(12, resultComplex2);
 		assertEquals(4.5, resultComplex3);
@@ -239,7 +238,7 @@ class ComplexFunctionTest {
 	}
 	@Test
 	void testEquals() {
-		
+
 		char c1 = 'g';
 		String s1 = "x^2";
 		String s2 = "mul(x,x)"; 
@@ -251,19 +250,19 @@ class ComplexFunctionTest {
 		ComplexFunction complex3 = (ComplexFunction)new ComplexFunction().initFromString(s3);
 		ComplexFunction complex4 = (ComplexFunction)new ComplexFunction().initFromString(s4);
 		ComplexFunction complex5 = (ComplexFunction)new ComplexFunction().initFromString(s5);
-		
+
 		boolean check1 = complex1.equals(complex2);
 		boolean check2 = complex5.equals(complex4);
 		boolean check3 = complex3.equals(complex3);
-						
+
 		assertEquals(true, check1);
 		assertEquals(true, check2);
 		assertEquals(true, check3);
-		
+
 		boolean check5 = complex1.equals(s2);
 		boolean check6 = complex1.equals(c1);
 		boolean check7 = complex3.equals(complex5);
-		
+
 		assertEquals(false, check5);
 		assertEquals(false, check6);
 		assertEquals(false, check7);

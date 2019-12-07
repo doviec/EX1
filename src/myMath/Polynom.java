@@ -153,7 +153,18 @@ public class Polynom implements Polynom_able{
 	 * checks if two polynoms are equal.
 	 */
 	public boolean equals(Object obj) {
-		if (obj instanceof Polynom_able || obj instanceof Monom) {
+
+		if (!(obj instanceof Polynom_able || obj instanceof Monom)) {
+			return false;
+		}
+		if (obj instanceof Monom) {
+			Monom objMonom = (Monom) obj;
+			Monom monom = monomsMap.get(objMonom.get_power());   //if (..) checks that the monom in the hashmap is equal and the only one that exits in the polynom
+			if (this.monomsMap.size() != 1 || monom == null || monom.get_coefficient() != objMonom.get_coefficient() || monom.get_power() != objMonom.get_power()) { 
+				return false;
+			}else return true;
+		}
+		else {
 			Iterator<Monom> iterator = ((Polynom) obj).iteretor();
 			int count = 0;
 			while (iterator.hasNext()) {
@@ -167,12 +178,13 @@ public class Polynom implements Polynom_able{
 					}
 				}
 			}
+
 			if (monomsMap.size() != count) {
 				return false;
 			}
-			return true;
 		}
-		else return false;
+		return true;
+
 	}
 	/**
 	 * checks if the polynom is zero

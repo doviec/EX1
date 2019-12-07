@@ -213,8 +213,6 @@ public class Functions_GUI implements functions{
 		Range ry=new Range(-10, 10);
 		list.drawFunctions(700, 700, rx, ry, 3000);
 
-
-
 	}
 
 }

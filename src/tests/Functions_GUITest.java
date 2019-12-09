@@ -1,14 +1,15 @@
 package tests;
 
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import myMath.ComplexFunction;
-import myMath.Functions_GUI;
-import myMath.Monom;
-import myMath.Polynom;
-import myMath.Range;
-import myMath.function;
+import EX1.ComplexFunction;
+import EX1.Functions_GUI;
+import EX1.Monom;
+import EX1.Polynom;
+import EX1.Range;
+import EX1.function;
 
 /**
  * Partial JUnit + main test for the GUI_Functions class, expected output from the main:

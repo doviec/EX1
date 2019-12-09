@@ -7,10 +7,10 @@ import java.util.Iterator;
 
 import org.junit.jupiter.api.Test;
 
-import myMath.Monom;
-import myMath.Polynom;
-import myMath.Polynom_able;
-import myMath.function;
+import EX1.Monom;
+import EX1.Polynom;
+import EX1.Polynom_able;
+import EX1.function;
 
 class PolynomTest {
 

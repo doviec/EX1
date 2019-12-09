@@ -1,9 +1,9 @@
 package tests;
-import myMath.*;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+
+import EX1.*;
 
 class ComplexFunctionTest {
 
@@ -13,7 +13,7 @@ class ComplexFunctionTest {
 	void testComplexFunction() {
 		String s1 = "div(plus(-1.0x^4 +2.4x^2 +3.1,+0.1x^5 -1.2999999999999998x +5.0),-1.0x^4 +2.4x^2 +3.1)"; 
 		String s2 = "mul(mul(1,2),3)";
-		String s3 = "mul(1,mul(2,3))";
+		String s3 = "none(2)";
 
 		ComplexFunction complex1 = (ComplexFunction)new ComplexFunction().initFromString(s1);
 		ComplexFunction complex2 = (ComplexFunction)new ComplexFunction().initFromString(s2);

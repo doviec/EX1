@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import EX1.Monom;
 import junit.framework.Assert;
-import myMath.Monom;
 
 class MonomTest {
 

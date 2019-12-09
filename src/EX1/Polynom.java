@@ -1,5 +1,5 @@
 
-package myMath;
+package EX1;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.function.Predicate;
 
-import myMath.Monom;
+import EX1.Monom;
 /**
  * This class represents a Polynom with add, multiply functionality, it also should support the following:
  * 1. Riemann's Integral: https://en.wikipedia.org/wiki/Riemann_integral
@@ -270,8 +270,11 @@ public class Polynom implements Polynom_able{
 		temp = x0+eps;
 
 		while (temp <=  x1) {
-			sumArea+=(this.f(temp))*eps;
-			temp+=eps;
+			
+			if (f(temp) > 0) {
+			sumArea += (this.f(temp))*eps;
+			}
+			temp += eps;
 		}
 
 		return sumArea;

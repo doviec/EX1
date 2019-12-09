@@ -1,4 +1,4 @@
-package myMath;
+package EX1;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -19,8 +19,6 @@ public class Functions_GUI implements functions{
 	public Functions_GUI() {
 		linkedList=new LinkedList<function>();
 	}
-
-
 
 	@Override
 	public int size() {
@@ -88,7 +86,7 @@ public class Functions_GUI implements functions{
 	}
 	public static Color[] Colors = {Color.blue, Color.cyan,
 			Color.MAGENTA, Color.ORANGE, Color.red, Color.GREEN, Color.PINK};
-	
+
 	public void drawFunctions(int w, int h, Range rx, Range ry, int res)
 	{
 		StdDraw.setCanvasSize(w,h);
@@ -123,9 +121,9 @@ public class Functions_GUI implements functions{
 		StdDraw.line(rx.get_min(), 0, rx.get_max(), 0);
 		StdDraw.line(0, ry.get_min(), 0, ry.get_max());
 		StdDraw.setPenRadius(0.009);
-		
+
 		double epsRes = (Math.abs(rx.get_max())+Math.abs(rx.get_min()))/res;
-		
+
 		for (int j = 0; j < linkedList.size(); j++) {
 			StdDraw.setPenColor(Colors[j%7]);
 			for (double i =rx.get_min() ; i < rx.get_max(); i+=epsRes)
@@ -201,7 +199,6 @@ public class Functions_GUI implements functions{
 			list.initFromFile("dovie.txt");
 		}
 		catch (Exception e) {
-			// TODO: handle exception
 		}
 		System.out.println(list.linkedList.toString());
 		try {

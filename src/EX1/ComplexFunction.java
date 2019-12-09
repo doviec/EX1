@@ -1,4 +1,4 @@
-package myMath;
+package EX1;
 
 import java.util.function.Function;
 
@@ -179,11 +179,15 @@ public class ComplexFunction implements complex_function {
 			this.left = copy();
 		}
 		root = op;
-		ComplexFunction complexFunction = (ComplexFunction) f1.copy();
-		if (complexFunction.getOp() == Operation.None){
-			this.right = complexFunction.left();
-		} else {
-			this.right = f1.copy();
+		if (f1 instanceof Monom || f1 instanceof Polynom) {
+			this.right = f1;
+		}else {
+			ComplexFunction complexFunction =  (ComplexFunction) f1.copy();
+			if (complexFunction.getOp() == Operation.None){
+				this.right = complexFunction.left();
+			} else {
+				this.right = f1.copy();
+			}
 		}
 	}
 	@Override
@@ -241,7 +245,7 @@ public class ComplexFunction implements complex_function {
 		return sb.toString();
 	}
 	public boolean equals(Object obj) { 
-		
+
 		if (!((obj instanceof ComplexFunction)||(obj instanceof Polynom)||(obj instanceof Monom))) {
 			return false;
 		}else {

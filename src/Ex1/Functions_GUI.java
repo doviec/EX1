@@ -1,4 +1,4 @@
-package EX1;
+package Ex1;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -10,8 +10,6 @@ import java.io.PrintWriter;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
-
-
 
 public class Functions_GUI implements functions{
 	private LinkedList<function> linkedList;
@@ -93,8 +91,9 @@ public class Functions_GUI implements functions{
 		StdDraw.setXscale(rx.get_min(), rx.get_max());
 		StdDraw.setYscale(ry.get_min(),ry.get_max());
 
-
-		for (int i = (int)ry.get_min(); i < ry.get_max(); i++)
+		double maxRange = Math.max(ry.get_max(),rx.get_max());
+		double minRange = Math.min(ry.get_min(),rx.get_min());
+		for (int i = (int)minRange; i <= maxRange; i++)
 		{			
 			StdDraw.setPenRadius(0.000005);  // x verticle
 			StdDraw.setPenColor(Color.LIGHT_GRAY);
@@ -105,7 +104,7 @@ public class Functions_GUI implements functions{
 			StdDraw.setPenColor(Color.BLUE);
 			StdDraw.text(i+0.30, -0.30, text);
 		}		
-		for (int i = (int)rx.get_min(); i < rx.get_max(); i++)
+		for (int i = (int)minRange; i <= maxRange; i++)
 		{
 			StdDraw.setPenColor(Color.LIGHT_GRAY);  // y gfty
 			StdDraw.line(i, ry.get_min(), i, ry.get_max());
@@ -133,20 +132,12 @@ public class Functions_GUI implements functions{
 				double y = linkedList.get(j).f(x);
 				double y0 = linkedList.get(j).f(x0);
 				StdDraw.line(x,y,x0,y0);
-
 			}
-
 		}
-
 	}
 	@Override
 	public void drawFunctions(String json_file) {
-		// TODO Auto-generated method stub
-
-	}
-	public void drawFunctions() {
-		// TODO Auto-generated method stub
-
+		
 	}
 	@Override
 	public void initFromFile(String file) throws IOException {
@@ -161,7 +152,6 @@ public class Functions_GUI implements functions{
 			}
 		}
 		catch (Exception e) {
-			// TODO: handle exception
 		}
 	}
 

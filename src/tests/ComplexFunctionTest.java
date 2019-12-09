@@ -3,7 +3,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import EX1.*;
+import Ex1.*;
 
 class ComplexFunctionTest {
 
@@ -12,16 +12,41 @@ class ComplexFunctionTest {
 	@Test
 	void testComplexFunction() {
 		String s1 = "div(plus(-1.0x^4 +2.4x^2 +3.1,+0.1x^5 -1.2999999999999998x +5.0),-1.0x^4 +2.4x^2 +3.1)"; 
-		String s2 = "mul(mul(1,2),3)";
-		String s3 = "none(2)";
+		String s2 = "plus(5,mul (mul (1,2), 3))";
+		String s3 = "mul(1,mul(2,3))";
+		String s4 = "div(x,x)";
+
+		String wrongString1 = "none(x,x)";
+		String wrongString2 = "plus(mul(mul(4,5)";
+		String wrongString3 = "mul(2,)     ";
 
 		ComplexFunction complex1 = (ComplexFunction)new ComplexFunction().initFromString(s1);
 		ComplexFunction complex2 = (ComplexFunction)new ComplexFunction().initFromString(s2);
 		ComplexFunction complex3 = (ComplexFunction)new ComplexFunction().initFromString(s3);	
+		ComplexFunction complex7 = (ComplexFunction)new ComplexFunction().initFromString(s4);	
 
 		System.out.println(complex1.toString());
 		System.out.println(complex2.toString());
-		System.out.println(complex3.toString());
+		System.out.println(complex3.toString());	
+		System.out.println(complex7.toString());
+		try {
+			ComplexFunction complex4 = (ComplexFunction)new ComplexFunction().initFromString(wrongString1);
+			fail("This String is invalid");
+		}catch (Exception e) {
+			System.out.println("Test complex4 exception is correct");
+		}	
+		try {
+			ComplexFunction complex5 = (ComplexFunction)new ComplexFunction().initFromString(wrongString2);
+			fail("This String is invalid");
+		}catch (Exception e) {
+			System.out.println("Test complex5 exception is correct");
+		}	
+		try {
+			ComplexFunction complex6 = (ComplexFunction)new ComplexFunction().initFromString(wrongString3);	
+			fail("This String is invalid");
+		}catch (Exception e) {
+			System.out.println("Test complex6 exception is correct");
+		}		
 	}
 	@Test
 	void testPlus() {
@@ -210,7 +235,7 @@ class ComplexFunctionTest {
 		String s3 = "div(plus(x^2,6x),mul(x,2))";    
 		String s4 = "max(mul(5x+2,0.25),div(2.2x,plus(1.2x,x)))";
 		String s5 = "comp(x^2,x+1)";
-		String s6 = "mul(20,div(x^3+2,0)"; 
+		String s6 = "mul(20,div(x^3+2,1-x))"; 
 
 		ComplexFunction complex1 = (ComplexFunction)new ComplexFunction().initFromString(s1);
 		ComplexFunction complex2 = (ComplexFunction)new ComplexFunction().initFromString(s2);
@@ -224,11 +249,12 @@ class ComplexFunctionTest {
 		double resultComplex3 = complex3.f(3);
 		double resultComplex4 = complex4.f(5.5);    
 		double resultComplex5 = complex5.f(2.2);
-
+		int x = 1;
 		try {
-			double resultComplex6 = complex6.f(1);
+			double resultComplex6 = complex6.f(x);
 			fail("can't divide by zero ");
 		}catch (Exception e) {
+			System.out.println("can't divide "+ s6.toString() + " when x = " + x);
 		}
 		assertEquals(9, resultComplex1);
 		assertEquals(12, resultComplex2);
@@ -266,6 +292,15 @@ class ComplexFunctionTest {
 		assertEquals(false, check5);
 		assertEquals(false, check6);
 		assertEquals(false, check7);
+	}
+	@Test
+	void testDeepCopy() {
+		Polynom polynom = new Polynom ("2x^3 + 4x");
+		ComplexFunction complexFunction = new ComplexFunction("plus",polynom,polynom);
+		polynom.multiply(new Monom ("5"));
+		System.out.println(complexFunction.toString());
+		ComplexFunction f = new ComplexFunction(" Plus ( Plus(0  ,0 ), 0 )");
+		System.out.println(f.toString());
 	}
 
 }

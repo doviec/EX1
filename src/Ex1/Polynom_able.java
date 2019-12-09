@@ -1,4 +1,4 @@
-package EX1;
+package Ex1;
 
 import java.util.Iterator;
 

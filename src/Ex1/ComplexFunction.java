@@ -1,4 +1,4 @@
-package EX1;
+package Ex1;
 
 import java.util.function.Function;
 
@@ -10,21 +10,36 @@ public class ComplexFunction implements complex_function {
 	private function left;
 	private function right;
 
+	/**
+	 * Constructor 
+	 */
 	public ComplexFunction() {
-
 	}
 	public ComplexFunction(function f) {
 
 		this.root = Operation.None;
-		this.left = f;
+		this.left = f.copy();
 		this.right = null;
+	}
+	public ComplexFunction(String string) {
+		function function = initFromString(string);
 	}
 	public ComplexFunction(String string, function f1, function f2) {
 
 		root = checkWhichOperation(string);
-		left = f1;
-		right = f2;
+		left = f1.copy();
+		right = f2.copy();
 	}
+	public ComplexFunction(Operation operation, function f1, function f2) {
+		root = operation;
+		left = f1.copy();
+		right = f2.copy();
+	}
+	/**
+	 * Checks which operation the string represents and returns the operation
+	 * @param string
+	 * @return
+	 */
 	private Operation checkWhichOperation(String string) {
 
 		switch (string) {
@@ -43,9 +58,14 @@ public class ComplexFunction implements complex_function {
 		case (""):
 			return Operation.None;
 		default :                      
-			return Operation.Error;
+			throw new RuntimeException("Invalid string");
 		}
 	}
+	/**
+	 * checks which string the operation represents and returns it
+	 * @param operation
+	 * @return
+	 */
 	private String checkWhichString(Operation operation) {     //checks which string represents the operation
 
 		switch (operation) {
@@ -64,13 +84,13 @@ public class ComplexFunction implements complex_function {
 		case None:
 			return "";
 		default :                     
-			return "error";
+			throw new RuntimeException("Invalid operation");
 		}
 	}
 	/**
-	 * builds a complex function from a valid string recursively
-	 * @param string
-	 * @return
+	 * builds a complex function from a string recursively (separates from operation f1 and f2)
+	 * @param string which will be divided to operation left and right
+	 * @return a Polynom or a new Complex function if the string didnt represent a single polynom
 	 */
 	private function buildComplexFromString(String string) {
 
@@ -88,6 +108,9 @@ public class ComplexFunction implements complex_function {
 			String lastOperation = string.substring(0,firstBracket);
 			Polynom f1 = new Polynom(string.substring(firstBracket+1, lastComma));
 			Polynom f2 = new Polynom(string.substring(lastComma+1, string.length()-1));
+			if (f1.toString().isEmpty() || f2.toString().isEmpty()) {    //checks if f1 or f2 had values and not mul(,2) or plus(,) for example
+				throw new RuntimeException("must enter two valid arguments");
+			}
 			return new ComplexFunction(lastOperation,f1,f2);                                          
 		}
 
@@ -102,8 +125,10 @@ public class ComplexFunction implements complex_function {
 	}
 	/**
 	 * finds the comma that belongs to its Operation in the beginning of the string
+	 * if we find a comma and the number of the left brackets are equal to the right brackets then we've found our comma 
+	 * that divides our string.
 	 * @param string
-	 * @return
+	 * @return the index of the expected comma
 	 */
 	public int findMainComma(String string) {
 
@@ -156,24 +181,37 @@ public class ComplexFunction implements complex_function {
 	}
 	@Override
 	public function initFromString(String s) {
-
+		function function;
 		String trimmedString = s.replaceAll("\\s","");
 		if (trimmedString.isEmpty()) {
-			//exception
+			throw new RuntimeException("The String"+s+" is invalid");
 		}
-		function function = buildComplexFromString(trimmedString);
-		if (function instanceof Polynom){
-			ComplexFunction complexFunction = new ComplexFunction(function);
-			return complexFunction;
-		} 
+		try {
+			function = buildComplexFromString(trimmedString);
+			if (function instanceof Polynom){
+				ComplexFunction complexFunction = new ComplexFunction(function);
+				return complexFunction;
+			} 
+		}catch (Exception e) {
+			throw new RuntimeException("The String "+s+" is invalid");
+		}
 		return function;	
 	}	
 	@Override
 	public function copy() {
-
-		ComplexFunction copy = new ComplexFunction(checkWhichString(getOp()),left(),right());
+		
+		if(right() == null) {
+			return new ComplexFunction(left.copy());
+		}else {
+		ComplexFunction copy = new ComplexFunction(checkWhichString(getOp()),left().copy(),right().copy());
 		return copy;
+		}
 	}
+	/**
+	 * The method checks which operation it needs to add as root and checks which function it received and puts it as f2 (right)
+	 * @param f1 which may be Monom Polynom or Complex function 
+	 * @param op - operation
+	 */
 	public void mathOperation(function f1, Operation op) {
 		if (this.right != null) {
 			this.left = copy();

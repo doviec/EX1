@@ -13,4 +13,4 @@ Polynom is a group of Monoms (may be one as well). This class allowes us to use 
 A ComplexFunction is made by a math Operation and one of the three functions. ComplexFunction also allowes to use math operations between itself and different functions.
 
 # Class Functions_GUI
-With this class we can read a file and take its functions and draw them in  a Y and X scales.
+With this class we can read given a file and take its functions and draw them in  a Y and X scales.

@@ -14,12 +14,14 @@ import java.util.LinkedList;
 import com.google.gson.Gson;
 
 public class Functions_GUI implements functions{
-	private LinkedList<function> linkedList;
+	public LinkedList<function> linkedList;
 
 	public Functions_GUI() {
 		linkedList=new LinkedList<function>();
 	}
-
+	public LinkedList<function> getLinklist(){
+		return linkedList;
+	}
 	@Override
 	public int size() {
 		return linkedList.size();
@@ -139,7 +141,7 @@ public class Functions_GUI implements functions{
 	}
 	@Override
 	public void drawFunctions(String json_file) {
-		
+
 		Gson gson = new Gson();
 		try {
 			JsonEx1 json = gson.fromJson(new FileReader(json_file), JsonEx1.class);
@@ -149,8 +151,8 @@ public class Functions_GUI implements functions{
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		
-		
+
+
 	}
 	@Override
 	public void initFromFile(String file) throws IOException {
@@ -167,7 +169,6 @@ public class Functions_GUI implements functions{
 		catch (Exception e) {
 		}
 	}
-
 	@Override
 	public void saveToFile(String file) throws IOException {
 
@@ -178,45 +179,7 @@ public class Functions_GUI implements functions{
 		}
 		writer.close();
 	}
-
 	public function get(int i) {
 		return linkedList.get(i);
 	}
-	public static void main(String[] args) {
-		String s1 = "x^2";
-		String s2 = "mul(x,x)";
-		String s3 = "mul(1,2)"; 
-		String s4 = "plus(4,mul(5x+2,x^5))";
-		String s5 = "plus(mul(x^5,5x+2),4)";
-
-		ComplexFunction complex1 = (ComplexFunction)new ComplexFunction().initFromString(s1);
-		ComplexFunction complex2 = (ComplexFunction)new ComplexFunction().initFromString(s2);
-		ComplexFunction complex3 = (ComplexFunction)new ComplexFunction().initFromString(s3);
-		ComplexFunction complex4 = (ComplexFunction)new ComplexFunction().initFromString(s4);
-		ComplexFunction complex5 = (ComplexFunction)new ComplexFunction().initFromString(s5);
-
-		Functions_GUI list = new Functions_GUI();
-		list.add(complex1);
-		list.add(complex2);
-		list.add(complex3);
-		list.add(complex4);
-		System.out.println(list.linkedList.toString());
-		try{
-			list.initFromFile("dovie.txt");
-		}
-		catch (Exception e) {
-		}
-		System.out.println(list.linkedList.toString());
-		try {
-			list.saveToFile("yishay.txt");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		list.drawFunctions("GUI_params.json");
-//		Range rx=new Range(-10, 10);
-//		Range ry=new Range(-10, 10);
-//		list.drawFunctions(700, 700, rx, ry, 3000);
-
-	}
-
 }

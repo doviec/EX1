@@ -1,10 +1,11 @@
 package tests;
 
+import static org.junit.Assert.assertTrue;
+import java.io.IOException;
 import java.util.Iterator;
-
+import javax.xml.crypto.Data;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import Ex1.ComplexFunction;
 import Ex1.Functions_GUI;
 import Ex1.Monom;
@@ -30,101 +31,117 @@ import Ex1.functions;
  *
  */
 class Functions_GUITest {
-	public static void main(String[] a) {
-		functions data = FunctionsFactory();
-			int w=1000, h=600, res=200;
-			Range rx = new Range(-10,10);
-			Range ry = new Range(-5,15);
-				data.drawFunctions(w,h,rx,ry,res);
-		String file = "function_file.txt";
-		String file2 = "function_file2.txt";
-		try {
-			data.saveToFile(file);
-			Functions_GUI data2 = new Functions_GUI();
-			data2.initFromFile(file);
-			data.saveToFile(file2);
-		}
-		catch(Exception e) {e.printStackTrace();}
-
-		String JSON_param_file = "GUI_params.json";
-		data.drawFunctions(JSON_param_file);
-	}
-//	private functions _data=null;
-	//	@BeforeAll
-	//	static void setUpBeforeClass() throws Exception {
-	//	}
-
-//	@BeforeEach
-//	void setUp() throws Exception {
-//		_data = FunctionsFactory();
-//	}
-//
-//	//@Test
-//	void testFunctions_GUI() {
-//		//	fail("Not yet implemented");
-//	}
-//
-//	//@Test
-//	void testInitFromFile() {
-//		//	fail("Not yet implemented");
-//	}
-//
-//	//@Test
-//	void testSaveToFile() {
-//
-//
-//	}
-//
-//	//@Test
-//	void testDrawFunctions() {
-//		//_data.drawFunctions();
-//		//	fail("Not yet implemented");
-//	}
-
 	@Test
-//	void testDrawFunctionsIntIntRangeRangeInt() {
-//		_data.drawFunctions("GUI_params.txt");
-//		//fail("Not yet implemented");
-//	}
-	public static functions FunctionsFactory() {
-		functions ans = new Functions_GUI();
-		String s1 = "3.1 +2.4x^2 -x^4";
-		String s2 = "5 +2x -3.3x +0.1x^5";
-		String[] s3 = {"x +3","x -2", "x -4"};
-		Polynom p1 = new Polynom(s1);
-		Polynom p2 = new Polynom(s2);
-		Polynom p3 = new Polynom(s3[0]);
-		ComplexFunction cf3 = new ComplexFunction(p3);
-		for(int i=1;i<s3.length;i++) {
-			cf3.mul(new Polynom(s3[i]));
-		}
+	void testBoazGui() {
+		{
+			functions ans = new Functions_GUI();
+			String s1 = "3.1 +2.4x^2 -x^4";
+			String s2 = "5 +2x -3.3x +0.1x^5";
+			String[] s3 = {"x +3","x -2", "x -4"};
+			Polynom p1 = new Polynom(s1);
+			Polynom p2 = new Polynom(s2);
+			Polynom p3 = new Polynom(s3[0]);
+			ComplexFunction cf3 = new ComplexFunction(p3);
+			for(int i=1;i<s3.length;i++) {
+				cf3.mul(new Polynom(s3[i]));
+			}
+			ComplexFunction cf = new ComplexFunction(Operation.Plus, p1,p2);
+			ComplexFunction cf4 = new ComplexFunction("div", new Polynom("x +1"),cf3);
+			cf4.plus(new Monom("2"));
+			ans.add(cf.copy());
+			ans.add(cf4.copy());
+			cf.div(p1);
+			ans.add(cf.copy());
+			String s = cf.toString();
+			function cf5 = cf4.initFromString(s1);
+			System.out.println(cf4.toString());
+			function cf6 = cf4.initFromString(s2);
+			ans.add(cf5.copy());
+			System.out.println(cf5.copy().toString());
+			ans.add(cf6.copy());
+			Iterator<function> iter = ans.iterator();
+			function f = iter.next();
+			ComplexFunction max = new ComplexFunction(f);
+			ComplexFunction min = new ComplexFunction(f);
+			while(iter.hasNext()) {
+				f = iter.next();
+				max.max(f);
+				min.min(f);
+			}
+			ans.add(max);
+			ans.add(min);		
 
-		ComplexFunction cf = new ComplexFunction(Operation.Plus, p1,p2);
-		ComplexFunction cf4 = new ComplexFunction("div", new Polynom("x +1"),cf3);
-		cf4.plus(new Monom("2"));
-		ans.add(cf.copy());
-		ans.add(cf4.copy());
-		cf.div(p1);
-		ans.add(cf.copy());
-		String s = cf.toString();
-		function cf5 = cf4.initFromString(s1);
-		System.out.println(cf4.toString());
-		function cf6 = cf4.initFromString(s2);
-		ans.add(cf5.copy());
-		System.out.println(cf5.copy().toString());
-		ans.add(cf6.copy());
-		Iterator<function> iter = ans.iterator();
-		function f = iter.next();
-		ComplexFunction max = new ComplexFunction(f);
-		ComplexFunction min = new ComplexFunction(f);
-		while(iter.hasNext()) {
-			f = iter.next();
-			max.max(f);
-			min.min(f);
-		}
-		ans.add(max);
-		ans.add(min);		
-			return ans;
+			functions data = ans;
+			//		int w=1000, h=600, res=200;       default
+			//		Range rx = new Range(-10,10);
+			//		Range ry = new Range(-5,15);
+			//		data.drawFunctions(w,h,rx,ry,res);
+			String file = "function_file.txt";
+			String file2 = "function_file2.txt";
+			try {
+				data.saveToFile(file);
+				Functions_GUI data2 = new Functions_GUI();
+				data2.initFromFile(file);
+				data.saveToFile(file2);
+			}
+			catch(Exception e) {e.printStackTrace();}
 
+			String JSON_param_file = "GUI_params.json";
+			data.drawFunctions(JSON_param_file);
+		}
+	}
+	@Test
+	void testMyGui() {
+		String s1 = "div(1,x)";
+		String s2 = "mul(x,x)";
+		String s3 = "mul(1,2)"; 
+		String s4 = "plus(4,mul(5x+2,x^5))";
+		String s5 = "plus(mul(x^5,5x+2),4)";
+		String s6 = "mul(x^2,x)";
+		String s7 = "plus(12,mul(3x,mul(x^4,3-x)))";
+		String s8 = "plus(-x,1)";
+
+		ComplexFunction complex1 = (ComplexFunction)new ComplexFunction().initFromString(s1);
+		ComplexFunction complex2 = (ComplexFunction)new ComplexFunction().initFromString(s2);
+		ComplexFunction complex3 = (ComplexFunction)new ComplexFunction().initFromString(s3);
+		ComplexFunction complex4 = (ComplexFunction)new ComplexFunction().initFromString(s4);
+		ComplexFunction complex5 = (ComplexFunction)new ComplexFunction().initFromString(s5);
+		ComplexFunction complex6 = (ComplexFunction)new ComplexFunction().initFromString(s6);
+		ComplexFunction complex7 = (ComplexFunction)new ComplexFunction().initFromString(s7);
+		ComplexFunction complex8 = (ComplexFunction)new ComplexFunction().initFromString(s8);
+
+		Functions_GUI listGui1 = new Functions_GUI();
+		Functions_GUI listGui2 = new Functions_GUI();
+
+		listGui1.add(complex1);
+		listGui1.add(complex2);
+		listGui1.add(complex3);
+		listGui1.add(complex4);
+		listGui1.add(complex5);
+		listGui2.add(complex6);
+		listGui2.add(complex7);
+		listGui2.add(complex8);
+
+		String myTestFile = "myTestFile.txt";
+		String testGuiCopy = "testGuiCopy.txt";
+		try {
+			listGui2.saveToFile(myTestFile);
+			listGui1.saveToFile(testGuiCopy);
+			listGui1.initFromFile(myTestFile);
+			listGui2.initFromFile(testGuiCopy);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		String JSON_param_file = "GUI_params.json";
+
+		System.out.println(listGui1.linkedList.toString());
+		System.out.println(listGui2.linkedList.toString());
+
+		listGui1.drawFunctions(JSON_param_file);
+		listGui2.drawFunctions(JSON_param_file);
+
+		assertTrue(listGui1.containsAll(listGui1));
 	}
 }
+
+

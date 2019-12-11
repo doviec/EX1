@@ -193,8 +193,13 @@ public class Polynom implements Polynom_able{
 	 */
 	@Override
 	public boolean isZero() {
-
-		return (monomsMap.size() == 0);
+		if (monomsMap.size() == 1 && monomsMap.get(0) != null){    //checks if the polynom has one monom zero
+			Monom monom = (Monom) monomsMap.get(0).copy();
+			if (monom.get_coefficient() == 0) {
+				return true;
+			}
+		}
+		return (monomsMap.size() == 0 );
 	}
 	/**
 	 * gets two double values and epsilon and returns if there is a value between the two that gives us zero if we send it to f(x) and is smaller then epsilon.

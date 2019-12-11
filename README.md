@@ -1,4 +1,4 @@
-# Ex1
+# Ex1 :sunglasses:
 EX1 matala is an assigment that represents three functions; Monom, Polynom and ComplexFunction.
 This project allows us to make a varrity of math operations towards these functions. 
 In addition we may read a file with a colections of functions and draw them with stddraw in class Functions_GUI.

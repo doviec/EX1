@@ -111,6 +111,8 @@ public class Polynom implements Polynom_able{
 					}
 				}
 			}
+		}else if (monomsMap.get(0) == null){
+			monomsMap.put(0,m1);
 		}
 	}
 	/**
@@ -150,7 +152,7 @@ public class Polynom implements Polynom_able{
 		monomsMap = p2.monomsMap;
 	}
 	/**
-	 * checks if two polynoms are equal.
+	 * checks if this Polynom and an Object are equal.
 	 */
 	public boolean equals(Object obj) {
 
@@ -270,9 +272,9 @@ public class Polynom implements Polynom_able{
 		temp = x0+eps;
 
 		while (temp <=  x1) {
-			
+
 			if (f(temp) > 0) {
-			sumArea += (this.f(temp))*eps;
+				sumArea += (this.f(temp))*eps;
 			}
 			temp += eps;
 		}
@@ -338,7 +340,7 @@ public class Polynom implements Polynom_able{
 		Iterator<Monom> iterator = this.iteretor();
 		while(iterator.hasNext()) {
 			Monom m = iterator.next();
-			if (m.get_coefficient()>0) {
+			if (m.get_coefficient() >= 0) {
 				sb.append("+");
 			}
 			sb.append(m.toString());
@@ -351,6 +353,10 @@ public class Polynom implements Polynom_able{
 		}
 		return polynomStr;
 	}
+	/**
+	 * this method gets a string and converts it to a Polynom
+	 * @return Polynom.
+	 */
 	@Override
 	public function initFromString(String s) {
 		return new Polynom(s);

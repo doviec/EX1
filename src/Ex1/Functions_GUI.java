@@ -11,6 +11,8 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+import com.google.gson.Gson;
+
 public class Functions_GUI implements functions{
 	private LinkedList<function> linkedList;
 
@@ -93,9 +95,9 @@ public class Functions_GUI implements functions{
 
 		double maxRange = Math.max(ry.get_max(),rx.get_max());
 		double minRange = Math.min(ry.get_min(),rx.get_min());
-		for (int i = (int)minRange; i <= maxRange; i++)
+		for (int i = (int)minRange; i <= maxRange; i++) // X scale
 		{			
-			StdDraw.setPenRadius(0.000005);  // x verticle
+			StdDraw.setPenRadius(0.000005);  
 			StdDraw.setPenColor(Color.LIGHT_GRAY);
 			StdDraw.line(rx.get_min(), i, rx.get_max(), i);
 			Font font = new Font("Arial", Font.BOLD, 15);
@@ -103,10 +105,10 @@ public class Functions_GUI implements functions{
 			String text=Integer.toString(i);
 			StdDraw.setPenColor(Color.BLUE);
 			StdDraw.text(i+0.30, -0.30, text);
-		}		
-		for (int i = (int)minRange; i <= maxRange; i++)
+		}	
+		for (int i = (int)minRange; i <= maxRange; i++) // Y scale
 		{
-			StdDraw.setPenColor(Color.LIGHT_GRAY);  // y gfty
+			StdDraw.setPenColor(Color.LIGHT_GRAY);  
 			StdDraw.line(i, ry.get_min(), i, ry.get_max());
 			Font font = new Font("Arial", Font.BOLD, 15);
 			StdDraw.setFont(font);
@@ -137,6 +139,17 @@ public class Functions_GUI implements functions{
 	}
 	@Override
 	public void drawFunctions(String json_file) {
+		
+		Gson gson = new Gson();
+		try {
+			JsonEx1 json = gson.fromJson(new FileReader(json_file), JsonEx1.class);
+			String result = gson.toJson(json);
+			System.out.println(result);
+			drawFunctions( json.width,json.height, json.rangeX , json.rangeY, json.resolution);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 		
 	}
 	@Override
@@ -169,7 +182,6 @@ public class Functions_GUI implements functions{
 	public function get(int i) {
 		return linkedList.get(i);
 	}
-
 	public static void main(String[] args) {
 		String s1 = "x^2";
 		String s2 = "mul(x,x)";
@@ -184,21 +196,26 @@ public class Functions_GUI implements functions{
 		ComplexFunction complex5 = (ComplexFunction)new ComplexFunction().initFromString(s5);
 
 		Functions_GUI list = new Functions_GUI();
-		System.out.println(list.linkedList.toString());
-		try{
-			list.initFromFile("dovie.txt");
-		}
-		catch (Exception e) {
-		}
-		System.out.println(list.linkedList.toString());
-		try {
-			list.saveToFile("yishay.txt");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		Range rx=new Range(-10, 10);
-		Range ry=new Range(-10, 10);
-		list.drawFunctions(700, 700, rx, ry, 3000);
+		list.add(complex1);
+		list.add(complex2);
+		list.add(complex3);
+		list.add(complex4);
+//		System.out.println(list.linkedList.toString());
+//		try{
+//			list.initFromFile("dovie.txt");
+//		}
+//		catch (Exception e) {
+//		}
+//		System.out.println(list.linkedList.toString());
+//		try {
+//			list.saveToFile("yishay.txt");
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+		list.drawFunctions("GUI_params.json");
+//		Range rx=new Range(-10, 10);
+//		Range ry=new Range(-10, 10);
+//		list.drawFunctions(700, 700, rx, ry, 3000);
 
 	}
 

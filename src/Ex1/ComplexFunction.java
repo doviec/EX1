@@ -21,9 +21,6 @@ public class ComplexFunction implements complex_function {
 		this.left = f.copy();
 		this.right = null;
 	}
-	public ComplexFunction(String string) {
-		function function = initFromString(string);
-	}
 	public ComplexFunction(String string, function f1, function f2) {
 
 		root = checkWhichOperation(string);
@@ -42,7 +39,7 @@ public class ComplexFunction implements complex_function {
 	 */
 	private Operation checkWhichOperation(String string) {
 
-		switch (string) {
+		switch (string.toLowerCase()) {
 		case ("plus"):
 			return Operation.Plus;
 		case ("mul"):
@@ -147,6 +144,10 @@ public class ComplexFunction implements complex_function {
 		}
 		return -1;
 	}
+	/**
+	 * this method calculates the value of this complex function by a given number recursively
+	 * @return double - the value of left and right.
+	 */
 	@Override
 	public double f(double x) {
 
@@ -179,6 +180,10 @@ public class ComplexFunction implements complex_function {
 			return this.f(x);
 		}
 	}
+	/**
+	 * this method gets a string and converts it to a complex function unless its not a valid string and throws an exception
+	 * @return function which the string represents
+	 */
 	@Override
 	public function initFromString(String s) {
 		function function;
@@ -187,7 +192,7 @@ public class ComplexFunction implements complex_function {
 			throw new RuntimeException("The String"+s+" is invalid");
 		}
 		try {
-			function = buildComplexFromString(trimmedString);
+			function = buildComplexFromString(trimmedString);      //send the string to a method that examines it and returns the complex function which it represents 
 			if (function instanceof Polynom){
 				ComplexFunction complexFunction = new ComplexFunction(function);
 				return complexFunction;
@@ -197,6 +202,10 @@ public class ComplexFunction implements complex_function {
 		}
 		return function;	
 	}	
+	/**
+	 * this methos copies this complex function to a new complex function
+	 * @return function
+	 */
 	@Override
 	public function copy() {
 		
@@ -260,11 +269,11 @@ public class ComplexFunction implements complex_function {
 	}
 	@Override
 	public function left() {
-		return this.left;
+		return this.left.copy();
 	}
 	@Override
 	public function right() {
-		return this.right;
+		return this.right.copy();
 	}
 	@Override
 	public Operation getOp() {
@@ -282,6 +291,11 @@ public class ComplexFunction implements complex_function {
 
 		return sb.toString();
 	}
+	/**
+	 * Indicates whether some other object is "equal to" this one. 
+	 * @param object
+	 * @return boolean 
+	 */
 	public boolean equals(Object obj) { 
 
 		if (!((obj instanceof ComplexFunction)||(obj instanceof Polynom)||(obj instanceof Monom))) {

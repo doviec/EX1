@@ -299,11 +299,17 @@ class ComplexFunctionTest {
 		ComplexFunction complexFunction = new ComplexFunction("plus",polynom,polynom);
 		polynom.multiply(new Monom ("5"));
 		System.out.println(complexFunction.toString());
-		ComplexFunction f = new ComplexFunction(" Plus ( Plus(0  ,0 ), 0 )");
-		System.out.println(f.toString());
 	}
-
+	@Test
+	void testSpeicalCases() {
+		
+		String s1 = " plus ( plus(0  ,0 ), 0 )";
+		ComplexFunction complex1 = (ComplexFunction) new ComplexFunction().initFromString(s1);
+		System.out.println(complex1.toString());
+	}
 }
+
+
 
 
 

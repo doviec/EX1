@@ -32,10 +32,10 @@ import Ex1.functions;
 class Functions_GUITest {
 	public static void main(String[] a) {
 		functions data = FunctionsFactory();
-		//	int w=1000, h=600, res=200;
-		//	Range rx = new Range(-10,10);
-		//	Range ry = new Range(-5,15);
-		//		data.drawFunctions(w,h,rx,ry,res);
+			int w=1000, h=600, res=200;
+			Range rx = new Range(-10,10);
+			Range ry = new Range(-5,15);
+				data.drawFunctions(w,h,rx,ry,res);
 		String file = "function_file.txt";
 		String file2 = "function_file2.txt";
 		try {
@@ -46,46 +46,46 @@ class Functions_GUITest {
 		}
 		catch(Exception e) {e.printStackTrace();}
 
-		String JSON_param_file = "GUI_params.txt";
+		String JSON_param_file = "GUI_params.json";
 		data.drawFunctions(JSON_param_file);
 	}
-	private functions _data=null;
+//	private functions _data=null;
 	//	@BeforeAll
 	//	static void setUpBeforeClass() throws Exception {
 	//	}
 
-	@BeforeEach
-	void setUp() throws Exception {
-		_data = FunctionsFactory();
-	}
-
-	//@Test
-	void testFunctions_GUI() {
-		//	fail("Not yet implemented");
-	}
-
-	//@Test
-	void testInitFromFile() {
-		//	fail("Not yet implemented");
-	}
-
-	//@Test
-	void testSaveToFile() {
-
-
-	}
-
-	//@Test
-	void testDrawFunctions() {
-		//_data.drawFunctions();
-		//	fail("Not yet implemented");
-	}
+//	@BeforeEach
+//	void setUp() throws Exception {
+//		_data = FunctionsFactory();
+//	}
+//
+//	//@Test
+//	void testFunctions_GUI() {
+//		//	fail("Not yet implemented");
+//	}
+//
+//	//@Test
+//	void testInitFromFile() {
+//		//	fail("Not yet implemented");
+//	}
+//
+//	//@Test
+//	void testSaveToFile() {
+//
+//
+//	}
+//
+//	//@Test
+//	void testDrawFunctions() {
+//		//_data.drawFunctions();
+//		//	fail("Not yet implemented");
+//	}
 
 	@Test
-	void testDrawFunctionsIntIntRangeRangeInt() {
-		_data.drawFunctions("GUI_params.txt");
-		//fail("Not yet implemented");
-	}
+//	void testDrawFunctionsIntIntRangeRangeInt() {
+//		_data.drawFunctions("GUI_params.txt");
+//		//fail("Not yet implemented");
+//	}
 	public static functions FunctionsFactory() {
 		functions ans = new Functions_GUI();
 		String s1 = "3.1 +2.4x^2 -x^4";
@@ -108,8 +108,10 @@ class Functions_GUITest {
 		ans.add(cf.copy());
 		String s = cf.toString();
 		function cf5 = cf4.initFromString(s1);
+		System.out.println(cf4.toString());
 		function cf6 = cf4.initFromString(s2);
 		ans.add(cf5.copy());
+		System.out.println(cf5.copy().toString());
 		ans.add(cf6.copy());
 		Iterator<function> iter = ans.iterator();
 		function f = iter.next();
@@ -122,8 +124,7 @@ class Functions_GUITest {
 		}
 		ans.add(max);
 		ans.add(min);		
-		//	return ans;
-		
-		return ans;
+			return ans;
+
 	}
 }

@@ -295,7 +295,7 @@ class ComplexFunctionTest {
 	}
 	@Test
 	void testDeepCopy() {
-		Polynom polynom = new Polynom ("2x^3 + 4x");
+		Polynom polynom = new Polynom ("4 + 5x^6 + 3x^12");
 		ComplexFunction complexFunction = new ComplexFunction("plus",polynom,polynom);
 		polynom.multiply(new Monom ("5"));
 		System.out.println(complexFunction.toString());

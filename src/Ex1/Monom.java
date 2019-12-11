@@ -95,7 +95,6 @@ public class Monom implements function {
 					} else {
 						set_power(1);
 					}
-
 				} else {
 					set_coefficient(parse(s));
 					set_power(0);
@@ -260,17 +259,17 @@ public class Monom implements function {
 
 	private double _coefficient;
 	private int _power;
-/**
- * this method gets a string and converts it to a Monom.
- * @return Monom
- */
+	/**
+	 * this method gets a string and converts it to a Monom.
+	 * @return Monom
+	 */
 	@Override
 	public function initFromString(String s) {
 		return new Monom(s);
 	}
-/**
- *  this methos copies this Monom to a new one and returns it
- */
+	/**
+	 *  this methos copies this Monom to a new one and returns it
+	 */
 	@Override
 	public function copy() {
 		return new Monom(get_coefficient(), get_power());

@@ -208,12 +208,12 @@ public class ComplexFunction implements complex_function {
 	 */
 	@Override
 	public function copy() {
-		
+
 		if(right() == null) {
 			return new ComplexFunction(left.copy());
 		}else {
-		ComplexFunction copy = new ComplexFunction(checkWhichString(getOp()),left().copy(),right().copy());
-		return copy;
+			ComplexFunction copy = new ComplexFunction(checkWhichString(getOp()),left().copy(),right().copy());
+			return copy;
 		}
 	}
 	/**
@@ -269,11 +269,15 @@ public class ComplexFunction implements complex_function {
 	}
 	@Override
 	public function left() {
-		return this.left.copy();
+		if (left == null) {
+			return left;
+		}else return this.left.copy();
 	}
 	@Override
 	public function right() {
-		return this.right.copy();
+		if (right == null) {
+			return right;
+		}else return this.right.copy();
 	}
 	@Override
 	public Operation getOp() {

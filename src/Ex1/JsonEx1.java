@@ -1,9 +1,10 @@
 package Ex1;
 
 public class JsonEx1 {
-	int width;
-	int height;	
-	Range rangeX;
-	Range rangeY;
-	int resolution;
+	int Width;
+	int Height;	
+	int Resolution;
+	double [] Range_X;
+	double [] Range_Y;
+	
 }

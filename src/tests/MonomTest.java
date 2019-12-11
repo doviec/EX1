@@ -9,7 +9,6 @@ import junit.framework.Assert;
 
 class MonomTest {
 
-
 	@Test
 	void testMonom() {
 		String Str1 = "x^5";
@@ -36,7 +35,6 @@ class MonomTest {
 			thrown4 = true;
 		}
 		assertTrue(thrown4);
-
 	}
 	@Test
 	void testDerivative() {
@@ -58,7 +56,6 @@ class MonomTest {
 		assertEquals(6, monom2.get_coefficient());
 		assertEquals(0, monom3.get_power());
 		assertEquals(1, monom3.get_coefficient());
-
 	}
 	@Test
 	void testMonomString() {
@@ -67,7 +64,6 @@ class MonomTest {
 		assertEquals(5, monom.get_power());
 		assertEquals(1, monom.get_coefficient());
 	}
-
 	@Test
 	void testAdd() {
 		String monomStr1 = "x^5";
@@ -93,7 +89,6 @@ class MonomTest {
 		assertEquals(5, monom1.get_power());
 		assertEquals(1, monom1.get_coefficient());
 	}
-
 	@Test
 	void testMultipy() {
 		String monomStr1 = "3x^5";
@@ -121,7 +116,6 @@ class MonomTest {
 		assertTrue(monom1.equals(monom2));
 		assertFalse(monom1.equals(monomStr2));
 	}
-
 }
 
 

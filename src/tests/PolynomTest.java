@@ -218,7 +218,6 @@ class PolynomTest {
 		assertFalse(polynom1.equals(true));
 		assertFalse(polynom5.equals(string3));
 	}
-
 	@Test
 	void testIsZero() {
 

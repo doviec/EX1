@@ -87,9 +87,9 @@ public class Functions_GUI implements functions{
 	public static Color[] Colors = {Color.blue, Color.cyan,
 			Color.MAGENTA, Color.ORANGE, Color.red, Color.GREEN, Color.PINK};
 
-	public void drawFunctions(int w, int h, Range rx, Range ry, int res)
+	public void drawFunctions(int Width, int Height, Range rx, Range ry, int Resolution)
 	{
-		StdDraw.setCanvasSize(w,h);
+		StdDraw.setCanvasSize(Width,Height);
 		StdDraw.setXscale(rx.get_min(), rx.get_max());
 		StdDraw.setYscale(ry.get_min(),ry.get_max());
 
@@ -123,7 +123,7 @@ public class Functions_GUI implements functions{
 		StdDraw.line(0, ry.get_min(), 0, ry.get_max());
 		StdDraw.setPenRadius(0.009);
 
-		double epsRes = (Math.abs(rx.get_max())+Math.abs(rx.get_min()))/res;
+		double epsRes = (Math.abs(rx.get_max())+Math.abs(rx.get_min()))/Resolution;
 
 		for (int j = 0; j < linkedList.size(); j++) {
 			StdDraw.setPenColor(Colors[j%7]);
@@ -145,7 +145,7 @@ public class Functions_GUI implements functions{
 			JsonEx1 json = gson.fromJson(new FileReader(json_file), JsonEx1.class);
 			String result = gson.toJson(json);
 			System.out.println(result);
-			drawFunctions( json.width,json.height, json.rangeX , json.rangeY, json.resolution);
+			drawFunctions( json.Width,json.Height,new Range(json.Range_X[0], json.Range_X[1]) ,new Range(json.Range_Y[0], json.Range_Y[1]), json.Resolution);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -200,18 +200,18 @@ public class Functions_GUI implements functions{
 		list.add(complex2);
 		list.add(complex3);
 		list.add(complex4);
-//		System.out.println(list.linkedList.toString());
-//		try{
-//			list.initFromFile("dovie.txt");
-//		}
-//		catch (Exception e) {
-//		}
-//		System.out.println(list.linkedList.toString());
-//		try {
-//			list.saveToFile("yishay.txt");
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
+		System.out.println(list.linkedList.toString());
+		try{
+			list.initFromFile("dovie.txt");
+		}
+		catch (Exception e) {
+		}
+		System.out.println(list.linkedList.toString());
+		try {
+			list.saveToFile("yishay.txt");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		list.drawFunctions("GUI_params.json");
 //		Range rx=new Range(-10, 10);
 //		Range ry=new Range(-10, 10);

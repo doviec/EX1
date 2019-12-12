@@ -222,7 +222,7 @@ class PolynomTest {
 	void testIsZero() {
 
 		String string1 ="2x^2-x";
-		String string2 ="0+0+0";
+		String string2 ="0+0+0-0";
 		String string3 ="2x^4-2x^4";
 
 		Polynom polynom1 = new Polynom(string1);

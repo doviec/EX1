@@ -128,7 +128,6 @@ public class ComplexFunction implements complex_function {
 	 * @return the index of the expected comma
 	 */
 	public int findMainComma(String string) {
-
 		int leftBracket = 0;
 		int rightBracket = 0;
 

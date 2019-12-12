@@ -152,7 +152,7 @@ public class ComplexFunction implements complex_function {
 
 		switch (this.root) {
 
-		case Plus :
+		case Plus :  
 			return left.f(x) + right.f(x);
 		case Times :
 			return left.f(x) * right.f(x);

@@ -268,7 +268,7 @@ public class Monom implements function {
 		return new Monom(s);
 	}
 	/**
-	 *  this methos copies this Monom to a new one and returns it
+	 *  this methos copies this Monom to a new one and returns it 
 	 */
 	@Override
 	public function copy() {

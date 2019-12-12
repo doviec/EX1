@@ -15,4 +15,5 @@ A ComplexFunction is a binary tree represented by a three Objects; root represnt
 This class implements function as well.
 
 # Class Functions_GUI
-With this class we can read given a file and take its functions and draw them in  a Y and X scales. Function_Gui is represented by a Linklised of functions.
+The Functions_GUI class implements the interface functions. It represents a collection of functions that we can save from to a file or read from a file and represent them in a graphic window. 
+

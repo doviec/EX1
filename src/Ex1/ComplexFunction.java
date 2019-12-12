@@ -295,7 +295,7 @@ public class ComplexFunction implements complex_function {
 		return sb.toString();
 	}
 	/**
-	 * Indicates whether some other object is "equal to" this one.   
+	 * Indicates whether some other object is "equal to" this one in a range between [-100,100] with jumps of 0.1.   
 	 * @param object
 	 * @return boolean 
 	 */
@@ -305,7 +305,7 @@ public class ComplexFunction implements complex_function {
 			return false;
 		}else {
 			ComplexFunction complexFunction = new ComplexFunction((function) obj);
-			for(double i = -10; i<=10; i+=0.1){                           //checks if the functions are equal in range between [-10,10] with jumps of 0.1
+			for(double i = -100; i<=100; i+=0.1){                           //checks if the functions are equal in range between [-10,10] with jumps of 0.1
 				if(complexFunction.f(i) != this.f(i)) {
 					return false;
 				}

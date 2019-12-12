@@ -49,7 +49,7 @@ class ComplexFunctionTest {
 	@Test
 	void testPlus() {
 
-		String s1 = "x^2";
+		String s1 = "x^ 2";
 		String s2 = "x";
 		String s3 = "mul(1,2)"; 
 		String s4 = "plus(4,mul(5x+2,x^5))";

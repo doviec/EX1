@@ -295,7 +295,7 @@ public class ComplexFunction implements complex_function {
 		return sb.toString();
 	}
 	/**
-	 * Indicates whether some other object is "equal to" this one. 
+	 * Indicates whether some other object is "equal to" this one.   
 	 * @param object
 	 * @return boolean 
 	 */
@@ -312,5 +312,5 @@ public class ComplexFunction implements complex_function {
 			}
 		}		
 		return true;
-	}
+	 }
 }

@@ -7,8 +7,6 @@ import Ex1.*;
 
 class ComplexFunctionTest {
 
-
-
 	@Test
 	void testComplexFunction() {
 		String s1 = "div(plus(-1.0x^4 +2.4x^2 +3.1,+0.1x^5 -1.2999999999999998x +5.0),-1.0x^4 +2.4x^2 +3.1)"; 

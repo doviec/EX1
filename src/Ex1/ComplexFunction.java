@@ -16,7 +16,7 @@ public class ComplexFunction implements complex_function {
 	public ComplexFunction() {
 	}
 	public ComplexFunction(function f) {
-
+		
 		this.root = Operation.None;
 		this.left = f.copy();
 		this.right = null;

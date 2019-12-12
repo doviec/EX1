@@ -185,7 +185,6 @@ class PolynomTest {
 		assertEquals(2, hashMap.get(1).get_coefficient());
 		assertEquals(-6, hashMap.get(0).get_coefficient());
 	}
-
 	@Test
 	void testEqualsPolynom_able() {
 

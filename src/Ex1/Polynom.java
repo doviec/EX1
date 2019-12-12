@@ -17,7 +17,6 @@ import Ex1.Monom;
  * @author Boaz
  *`
  */
-
 public class Polynom implements Polynom_able{
 
 	private HashMap<Integer,Monom> monomsMap;

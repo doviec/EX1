@@ -88,11 +88,13 @@ public class Functions_GUI implements functions{
 	}
 	public static Color[] Colors = {Color.blue, Color.cyan,
 			Color.MAGENTA, Color.ORANGE, Color.red, Color.GREEN, Color.PINK};
-
+	/**
+	 *  this method draws the graphic window and functions according to given measurements 
+	 */
 	public void drawFunctions(int Width, int Height, Range rx, Range ry, int Resolution)
 	{
 		StdDraw.setCanvasSize(Width,Height);
-		StdDraw.setXscale(rx.get_min(), rx.get_max());
+		StdDraw.setXscale(rx.get_min(), rx.get_max());       
 		StdDraw.setYscale(ry.get_min(),ry.get_max());
 
 		double maxRange = Math.max(ry.get_max(),rx.get_max());
@@ -106,7 +108,7 @@ public class Functions_GUI implements functions{
 			StdDraw.setFont(font);
 			String text=Integer.toString(i);
 			StdDraw.setPenColor(Color.BLUE);
-			StdDraw.text(i+0.30, -0.30, text);
+			StdDraw.text(i+0.30, -0.30, text);  //numbers on the scale
 		}	
 		for (int i = (int)minRange; i <= maxRange; i++) // Y scale
 		{
@@ -116,16 +118,15 @@ public class Functions_GUI implements functions{
 			StdDraw.setFont(font);
 			String text=Integer.toString(i);
 			StdDraw.setPenColor(Color.BLUE);
-			StdDraw.text(-0.3,i+0.4, text);
+			StdDraw.text(-0.3,i+0.4, text);  //numbers on the scale
 		}
-
 		StdDraw.setPenColor(Color.BLACK);
 		StdDraw.setPenRadius(0.0012);
 		StdDraw.line(rx.get_min(), 0, rx.get_max(), 0);
 		StdDraw.line(0, ry.get_min(), 0, ry.get_max());
 		StdDraw.setPenRadius(0.009);
 
-		double epsRes = (Math.abs(rx.get_max())+Math.abs(rx.get_min()))/Resolution;
+		double epsRes = (Math.abs(rx.get_max())+Math.abs(rx.get_min()))/Resolution;  //epsilon according to range divide by resolution
 
 		for (int j = 0; j < linkedList.size(); j++) {
 			StdDraw.setPenColor(Colors[j%7]);
@@ -139,6 +140,9 @@ public class Functions_GUI implements functions{
 			}
 		}
 	}
+	/**
+	 * draws a graphic window according to a given string in a file
+	 */
 	@Override
 	public void drawFunctions(String json_file) {
 
@@ -151,9 +155,10 @@ public class Functions_GUI implements functions{
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-
-
 	}
+	/**
+	 * this method reads the string from a given file and adds it to the linklist
+	 */
 	@Override
 	public void initFromFile(String file) throws IOException {
 		try {
@@ -169,6 +174,9 @@ public class Functions_GUI implements functions{
 		catch (Exception e) {
 		}
 	}
+	/**
+	 * saves the linklist into a given file
+	 */
 	@Override
 	public void saveToFile(String file) throws IOException {
 

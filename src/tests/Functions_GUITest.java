@@ -112,23 +112,25 @@ class Functions_GUITest {
 
 		Functions_GUI listGui1 = new Functions_GUI();
 		Functions_GUI listGui2 = new Functions_GUI();
-
+	
+		
 		listGui1.add(complex1);
 		listGui1.add(complex2);
 		listGui1.add(complex3);
 		listGui1.add(complex4);
 		listGui1.add(complex5);
-		listGui2.add(complex6);
-		listGui2.add(complex7);
-		listGui2.add(complex8);
+		listGui1.add(complex6);
+		listGui1.add(complex7);
+		listGui1.add(complex8);
 
-		String myTestFile = "myTestFile.txt";
+		String myTestFile = "myTestFile222.txt";
 		String testGuiCopy = "testGuiCopy.txt";
 		try {
-			listGui2.saveToFile(myTestFile);
-			listGui1.saveToFile(testGuiCopy);
-			listGui1.initFromFile(myTestFile);
-			listGui2.initFromFile(testGuiCopy);
+			listGui1.saveToFile(myTestFile);
+			
+			listGui2.initFromFile(myTestFile);
+
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
